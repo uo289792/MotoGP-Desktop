@@ -1,0 +1,1 @@
+<!ELEMENT circuito (nombre, caracteristicas, carrera, ubicacion, tramos, multimedia, resultados, referencias)>
