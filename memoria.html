@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="David Muños Río" />
+    <meta name="description" content="Información de ayuda del proyecto MotoGP-Desktop - en desarrollo" />
+    <meta name="keywords" content="MotoGP, MotoGP-Desktop, pilotos, circuito, juego, cartas" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MotoGP-Ayuda</title>
+
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <link rel="stylesheet" href="estilo/cards.css">       
+    <link rel="stylesheet" href="estilo/layout-cards.css">
+
+</head>
+<body>
+    <header>
+        <h1>MotoGP Desktop</h1>
+        
+        <nav aria-label="Menú principal">
+            <a href="index.html" title="Inicio">Inicio</a>
+            <a href="piloto.html" title="Información del piloto">Piloto</a>
+            <a href="circuito.html" title="Información de circuitos">Circuito</a>
+            <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
+            <a href="clasificaciones.html" title="Clasificaciones">Clasificaciones</a>
+            <a href="juegos.html" title="Juegos">Juegos</a>
+            <a href="ayuda.html" title="Ayuda del proyecto" class="active">Ayuda</a>
+        </nav>
+
+    </header>
+    
+    <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Juego de memoria con cartas</p>
+    
+    <main>
+        <h2>Juego de memoria con cartas</h2>
+
+        <!-- 12 cartas: 6 pares (Honda, Yamaha, Ducati, KTM, Aprilia, MotoGP) -->
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="honda">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/honda.svg" alt="Logo-Honda">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="honda">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/honda.svg" alt="Logo-Honda">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="yamaha">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/yamaha.svg" alt="Logo-Yamaha">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="yamaha">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/yamaha.svg" alt="Logo-Yamaha">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="ducati">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/ducati.svg" alt="Logo-Ducati">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="ducati">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/ducati.svg" alt="Logo-Ducati">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="ktm">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/ktm.svg" alt="Logo-KTM">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="ktm">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/ktm.svg" alt="Logo-KTM">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="aprilia">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/aprilia.svg" alt="Logo-Aprilia">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="aprilia">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/aprilia.svg" alt="Logo-Aprilia">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="motogp">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/motogp.svg" alt="Logo-MotoGP">
+        </article>
+
+        <article onclick="window.juegoMemoria.flipCard(this)" data-card="motogp">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/motogp.svg" alt="Logo-MotoGP">
+        </article>
+    </main>
+
+    <script src="js/memoria.js"></script>
+    <script>
+        window.juegoMemoria = new Memoria();
+    </script>
+
+</body>
+</html>
