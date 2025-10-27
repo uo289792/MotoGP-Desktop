@@ -43,12 +43,4 @@ class Ciudad {
       document.write(`<p>Coordenadas: lat ${this._coordenadas.lat}, lon ${this._coordenadas.lon}</p>`);
     }
   }
-
-  // método auxiliar que escribe toda la información en el documento (párrafos, listas...)
-  writeFullInfo() {
-    document.write(`<h2>${this.getNombre()}</h2>`);
-    document.write(`<p>País: ${this.getPais()}</p>`);
-    document.write(this.getInfoSecundariaHTML());
-    this.writeCoordenadas();
-  }
 }
