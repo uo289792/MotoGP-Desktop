@@ -1,0 +1,11 @@
+main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+   gap: 1rem;  /* cambiar */    
+} 
+
+main h2{
+  grid-column: span 4; /* cambiar */  
+} 
+
+/* hacer adaptable con media query, solo pasar de 4 a 2 columnas de 320 a 799 más o menos*/
