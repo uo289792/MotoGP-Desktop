@@ -13,6 +13,10 @@ main h2 {
   margin: 0 0 1rem 0;
 }
 
+main article h3 {
+  color: white;           /* color del texto en blanco */
+}
+
 /* especificidad: 001 */
 @media (max-width: 600px) {
   main {
