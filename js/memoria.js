@@ -200,8 +200,5 @@ comprobarPareja() {
     // comprobar pareja (este método decidirá si deshabilitar o cubrir)
     // comprobación puede invocar reinicios / desbloqueos según corresponda
     this.comprobarPareja();
-
-    // Si comprobarPareja llama a cubrirCartas, éste hará el reinicio tras timeout.
-    // Si llama a deshabilitarCartas, reinicio se hará inmediatamente en ese método.
   }
 }
