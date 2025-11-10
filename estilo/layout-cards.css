@@ -13,8 +13,10 @@ main h2 {
   margin: 0 0 1rem 0;
 }
 
+/* especificidad: 003 */
 main article h3 {
   color: white;           /* color del texto en blanco */
+  text-align: center;
 }
 
 /* especificidad: 001 */

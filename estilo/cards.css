@@ -16,9 +16,12 @@ main article {
 
 /* Regla con la transformación que permite girar la carta cuando se le pone el data-state al valor flip */
 /* especificidad: 012 */
+main article[data-state=revelada],
 main article[data-state=flip] {
     transform: rotateY(180deg);
+    pointer-events: none;
 }
+
 
 /* Reglas con los estilos generales para el encabezado y la imagen de la carta */
 /* especificidad: 002 */
