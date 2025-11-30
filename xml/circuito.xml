@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE circuito SYSTEM "circuito.dtd">
-<circuito id="circuito-mugello-2025">
+<circuito>
     
     <nombre>Autodromo Internazionale del Mugello</nombre>
 
     <caracteristicas>
-        <longitud unidad="metros">5243</longitud>
+        <longitudCircuito unidad="metros">5243</longitudCircuito>
         <anchura unidad="metros">12</anchura>
         <localidad>Borgo San Lorenzo</localidad>
         <pais>Italia</pais>
@@ -20,43 +20,40 @@
 
   
     <origen>
-        <longitudCoord>11.3714</longitudCoord>
-        <latitudCoord>43.9975</latitudCoord>
+        <longitud>11.3714</longitud>
+        <latitud>43.9975</latitud>
         <altitud unidad="metros">255</altitud>
     </origen>
-  
 
     <tramos>
-        <tramo id="t1">
-            <distancia unidad="m" value="900"/>
-            <puntoFinal>
-                <longitudCoord>11.3540</longitudCoord>
-                <latitudCoord>43.9789</latitudCoord>
+        <tramo id="t1" sector="1">
+            <distancia unidad="metros" value="900"/>
+            <punto>
+                <longitud>11.3540</longitud>
+                <latitud>43.9789</latitud>
                 <altitud unidad="metros">251</altitud>
-            </puntoFinal>
-            <sector>1</sector>
+            </punto>
         </tramo>
 
-        <tramo id="t2">
-            <distancia unidad="m" value="1600"/>
-            <puntoFinal>
-                <longitudCoord>11.3578</longitudCoord>
-                <latitudCoord>43.9801</latitudCoord>
+        <tramo id="t2" sector="2">
+            <distancia unidad="metros" value="1600"/>
+            <punto>
+                <longitud>11.3578</longitud>
+                <latitud>43.9801</latitud>
                 <altitud unidad="metros">255</altitud>
-            </puntoFinal>
-            <sector>2</sector>
+            </punto>
         </tramo>
 
-        <tramo id="t3">
+        <tramo id="t3" sector="3">
             <distancia unidad="m" value="2743"/>
-            <puntoFinal>
-                <longitudCoord>11.3523</longitudCoord>
-                <latitudCoord>43.9775</latitudCoord>
+            <punto>
+                <longitud>11.3523</longitud>
+                <latitud>43.9775</latitud>
                 <altitud unidad="metros">250</altitud>
-            </puntoFinal>
-            <sector>3</sector>
+            </punto>
         </tramo>
     </tramos>
+
 
     <multimedia>
         <fotos>
@@ -75,32 +72,26 @@
         </vencedor>
 
         <podium>
-            <puesto>
-                <posicion>1</posicion>
+            <puesto posicion="1" pais="España" puntos="545">
                 <piloto>Marc Márquez</piloto>
-                <pais>España</pais>
-                <puntos>25</puntos>
             </puesto>
-            <puesto>
-                <posicion>2</posicion>
+            <puesto posicion="2" pais="España" puntos="467">
                 <piloto>Álex Márquez</piloto>
-                <pais>España</pais>
-                <puntos>20</puntos>
             </puesto>
-            <puesto>
-                <posicion>3</posicion>
-                <piloto>Fabio Di Giannantonio</piloto>
-                <pais>Italia</pais>
-                <puntos>16</puntos>
+            <puesto posicion="3" pais="Italia" puntos="353">
+                <piloto>Marco Bezzecchi</piloto>
             </puesto>
         </podium>
+
+
     </resultados>
 
 
     <referencias>
-        <referencia>Web oficial: https://www.mugellocircuit.com</referencia>
-        <referencia>Wikipedia: https://es.wikipedia.org/wiki/Autódromo_Internacional_del_Mugello</referencia>
-        <referencia>Articulo: https://tips.gg/es/article/mugello-circuit-motogp-overview-and-notable-performances/</referencia>
+        <referencia sitio="Web oficial">https://www.mugellocircuit.com</referencia>
+        <referencia sitio="Wikipedia">https://es.wikipedia.org/wiki/Autódromo_Internacional_del_Mugello</referencia>
+        <referencia sitio="Artículo">https://tips.gg/es/article/mugello-circuit-motogp-overview-and-notable-performances/</referencia>
     </referencias>
+
 
 </circuito>
