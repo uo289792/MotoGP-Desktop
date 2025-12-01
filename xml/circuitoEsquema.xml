@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuito xmlns="http://www.uniovi.es"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.uniovi.es circuito.xsd">
+    
+    <nombre>Autodromo Internazionale del Mugello</nombre>
+
+    <caracteristicas>
+        <longitudCircuito unidad="metros">5243</longitudCircuito>
+        <anchura unidad="metros">12</anchura>
+        <localidad>Borgo San Lorenzo</localidad>
+        <pais>Italia</pais>
+        <patrocinador>Brembo</patrocinador>
+    </caracteristicas>
+
+    <carrera> 
+        <fecha>2025-06-22</fecha>
+        <hora zona="CET">15:00</hora>
+        <numVueltas>22</numVueltas>
+    </carrera>
+
+  
+    <origen>
+        <longitud unidad="grados">11.3714925785516</longitud>
+        <latitud unidad="grados">43.99760449288367</latitud>
+        <altitud unidad="metros">256</altitud>
+    </origen>
+
+    <tramos>
+        <tramo id="t1" sector="1">
+            <distancia unidad="metros" value="150"/>
+            <punto>
+                <longitud unidad="grados">11.37228667656493</longitud>
+                <latitud unidad="grados">43.99883351380287</latitud>
+                <altitud unidad="metros">257</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t2" sector="1">
+            <distancia unidad="metros" value="137"/>
+            <punto>
+                <longitud unidad="grados">11.37312387672952</longitud>
+                <latitud unidad="grados">43.99991251723909</latitud>
+                <altitud unidad="metros">258</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t3" sector="1">
+            <distancia unidad="metros" value="144"/>
+            <punto>
+                <longitud unidad="grados">11.37399752716947</longitud>
+                <latitud unidad="grados">44.00104498841995</latitud>
+                <altitud unidad="metros">267</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t4" sector="1">
+            <distancia unidad="metros" value="216"/>
+            <punto>
+                <longitud unidad="grados">11.37500379345309</longitud>
+                <latitud unidad="grados">44.002852112981</latitud>
+                <altitud unidad="metros">267</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t5" sector="1">
+            <distancia unidad="metros" value="43"/>
+            <punto>
+                <longitud unidad="grados">11.37531223584364</longitud>
+                <latitud unidad="grados">44.00317362395722</latitud>
+                <altitud unidad="metros">269</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t6" sector="1">
+            <distancia unidad="metros" value="32"/>
+            <punto>
+                <longitud unidad="grados">11.37570492982971</longitud>
+                <latitud unidad="grados">44.00325620585428</latitud>
+                <altitud unidad="metros">274</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t7" sector="1">
+            <distancia unidad="metros" value="33"/>
+            <punto>
+                <longitud unidad="grados">11.37610042234303</longitud>
+                <latitud unidad="grados">44.00314625813808</latitud>
+                <altitud unidad="metros">270</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t8" sector="1">
+            <distancia unidad="metros" value="49"/>
+            <punto>
+                <longitud unidad="grados">11.37636162962919</longitud>
+                <latitud unidad="grados">44.00273795701778</latitud>
+                <altitud unidad="metros">273</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t9" sector="1">
+            <distancia unidad="metros" value="130"/>
+            <punto>
+                <longitud unidad="grados">11.37605497630817</longitud>
+                <latitud unidad="grados">44.00158473077423</latitud>
+                <altitud unidad="metros">281</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t10" sector="1">
+            <distancia unidad="metros" value="44"/>
+            <punto>
+                <longitud unidad="grados">11.37618428681775</longitud>
+                <latitud unidad="grados">44.0011939698124</latitud>
+                <altitud unidad="metros">281</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t11" sector="1">
+            <distancia unidad="metros" value="82"/>
+            <punto>
+                <longitud unidad="grados">11.37707330743146</longitud>
+                <latitud unidad="grados">44.00082074451353</latitud>
+                <altitud unidad="metros">283</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t12" sector="1">
+            <distancia unidad="metros" value="29"/>
+            <punto>
+                <longitud unidad="grados">11.37725845822064</longitud>
+                <latitud unidad="grados">44.00058841372039</latitud>
+                <altitud unidad="metros">284</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t13" sector="1">
+            <distancia unidad="metros" value="27"/>
+            <punto>
+                <longitud unidad="grados">11.37728522133121</longitud>
+                <latitud unidad="grados">44.00033939271687</latitud>
+                <altitud unidad="metros">285</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t14" sector="1">
+            <distancia unidad="metros" value="37"/>
+            <punto>
+                <longitud unidad="grados">11.37710570009943</longitud>
+                <latitud unidad="grados">44.00003254419712</latitud>
+                <altitud unidad="metros">286</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t15" sector="1">
+            <distancia unidad="metros" value="323"/>
+            <punto>
+                <longitud unidad="grados">11.37487101118631</longitud>
+                <latitud unidad="grados">43.99761153635922</latitud>
+                <altitud unidad="metros">282</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t16" sector="2">
+            <distancia unidad="metros" value="28"/>
+            <punto>
+                <longitud unidad="grados">11.37477538736605</longitud>
+                <latitud unidad="grados">43.99736556358079</latitud>
+                <altitud unidad="metros">282</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t17" sector="2">
+            <distancia unidad="metros" value="35"/>
+            <punto>
+                <longitud unidad="grados">11.37493164429141</longitud>
+                <latitud unidad="grados">43.99707050396318</latitud>
+                <altitud unidad="metros">282</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t18" sector="2">
+            <distancia unidad="metros" value="41"/>
+            <punto>
+                <longitud unidad="grados">11.37516548233659</longitud>
+                <latitud unidad="grados">43.99673271567121</latitud>
+                <altitud unidad="metros">281</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t19" sector="2">
+            <distancia unidad="metros" value="44"/>
+            <punto>
+                <longitud unidad="grados">11.37514520878729</longitud>
+                <latitud unidad="grados">43.99633067172314</latitud>
+                <altitud unidad="metros">279</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t20" sector="2">
+            <distancia unidad="metros" value="305"/>
+            <punto>
+                <longitud unidad="grados">11.37274007387488</longitud>
+                <latitud unidad="grados">43.99419572030954</latitud>
+                <altitud unidad="metros">266</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t21" sector="2">
+            <distancia unidad="metros" value="47"/>
+            <punto>
+                <longitud unidad="grados">11.37218309696675</longitud>
+                <latitud unidad="grados">43.99403816009443</latitud>
+                <altitud unidad="metros">264</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t22" sector="2">
+            <distancia unidad="metros" value="75"/>
+            <punto>
+                <longitud unidad="grados">11.37124279572414</longitud>
+                <latitud unidad="grados">43.99406079130544</latitud>
+                <altitud unidad="metros">257</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t23" sector="2">
+            <distancia unidad="metros" value="58"/>
+            <punto>
+                <longitud unidad="grados">11.37054667173657</longitud>
+                <latitud unidad="grados">43.99391044497865</latitud>
+                <altitud unidad="metros">252</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t24" sector="2">
+            <distancia unidad="metros" value="51"/>
+            <punto>
+                <longitud unidad="grados">11.3701624893286</longitud>
+                <latitud unidad="grados">43.99353788558925</latitud>
+                <altitud unidad="metros">249</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t25" sector="2">
+            <distancia unidad="metros" value="181"/>
+            <punto>
+                <longitud unidad="grados">11.36933441174823</longitud>
+                <latitud unidad="grados">43.99202085391791</latitud>
+                <altitud unidad="metros">244</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t26" sector="2">
+            <distancia unidad="metros" value="49"/>
+            <punto>
+                <longitud unidad="grados">11.36893926303918</longitud>
+                <latitud unidad="grados">43.99167740883907</latitud>
+                <altitud unidad="metros">244</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t27" sector="2">
+            <distancia unidad="metros" value="43"/>
+            <punto>
+                <longitud unidad="grados">11.36843072574418</longitud>
+                <latitud unidad="grados">43.9915480371066</latitud>
+                <altitud unidad="metros">245</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t28" sector="2">
+            <distancia unidad="metros" value="45"/>
+            <punto>
+                <longitud unidad="grados">11.36785838939259</longitud>
+                <latitud unidad="grados">43.99153775648551</latitud>
+                <altitud unidad="metros">246</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t29" sector="2">
+            <distancia unidad="metros" value="159"/>
+            <punto>
+                <longitud unidad="grados">11.36609823978219</longitud>
+                <latitud unidad="grados">43.99220610468428</latitud>
+                <altitud unidad="metros">258</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t30" sector="2">
+            <distancia unidad="metros" value="38"/>
+            <punto>
+                <longitud unidad="grados">11.36581466681027</longitud>
+                <latitud unidad="grados">43.99248979587397</latitud>
+                <altitud unidad="metros">262</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t31" sector="2">
+            <distancia unidad="metros" value="58"/>
+            <punto>
+                <longitud unidad="grados">11.3658254266748</longitud>
+                <latitud unidad="grados">43.99301844057482</latitud>
+                <altitud unidad="metros">266</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t32" sector="2">
+            <distancia unidad="metros" value="274"/>
+            <punto>
+                <longitud unidad="grados">11.36649055975178</longitud>
+                <latitud unidad="grados">43.99543697890847</latitud>
+                <altitud unidad="metros">272</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t33" sector="3">
+            <distancia unidad="metros" value="34"/>
+            <punto>
+                <longitud unidad="grados">11.36681720937693</longitud>
+                <latitud unidad="grados">43.99563914835539</latitud>
+                <altitud unidad="metros">271</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t34" sector="3">
+            <distancia unidad="metros" value="38"/>
+            <punto>
+                <longitud unidad="grados">11.36728687180366</longitud>
+                <latitud unidad="grados">43.99570897251627</latitud>
+                <altitud unidad="metros">270</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t35" sector="3">
+            <distancia unidad="metros" value="49"/>
+            <punto>
+                <longitud unidad="grados">11.36790308585718</longitud>
+                <latitud unidad="grados">43.99572038931182</latitud>
+                <altitud unidad="metros">270</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t36" sector="3">
+            <distancia unidad="metros" value="38"/>
+            <punto>
+                <longitud unidad="grados">11.36825869131312</longitud>
+                <latitud unidad="grados">43.9959538130889</latitud>
+                <altitud unidad="metros">269</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t37" sector="3">
+            <distancia unidad="metros" value="46"/>
+            <punto>
+                <longitud unidad="grados">11.36848326500437</longitud>
+                <latitud unidad="grados">43.99633944131232</latitud>
+                <altitud unidad="metros">267</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t38" sector="3">
+            <distancia unidad="metros" value="304"/>
+            <punto>
+                <longitud unidad="grados">11.36956325000634</longitud>
+                <latitud unidad="grados">43.99896839022298</latitud>
+                <altitud unidad="metros">272</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t39" sector="3">
+            <distancia unidad="metros" value="52"/>
+            <punto>
+                <longitud unidad="grados">11.37007516662519</longitud>
+                <latitud unidad="grados">43.99926281569537</latitud>
+                <altitud unidad="metros">270</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t40" sector="3">
+            <distancia unidad="metros" value="36"/>
+            <punto>
+                <longitud unidad="grados">11.37052588277661</longitud>
+                <latitud unidad="grados">43.9992390984272</latitud>
+                <altitud unidad="metros">267</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t41" sector="3">
+            <distancia unidad="metros" value="43"/>
+            <punto>
+                <longitud unidad="grados">11.37096235852168</longitud>
+                <latitud unidad="grados">43.9990046165946</latitud>
+                <altitud unidad="metros">266</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t42" sector="3">
+            <distancia unidad="metros" value="28"/>
+            <punto>
+                <longitud unidad="grados">11.37100925928581</longitud>
+                <latitud unidad="grados">43.99874651530678</latitud>
+                <altitud unidad="metros">265</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t43" sector="3">
+            <distancia unidad="metros" value="32"/>
+            <punto>
+                <longitud unidad="grados">11.37095794889867</longitud>
+                <latitud unidad="grados">43.99845282907923</latitud>
+                <altitud unidad="metros">263</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t44" sector="3">
+            <distancia unidad="metros" value="142"/>
+            <punto>
+                <longitud unidad="grados">11.36991081377714</longitud>
+                <latitud unidad="grados">43.99741913652327</latitud>
+                <altitud unidad="metros">262</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t45" sector="3">
+            <distancia unidad="metros" value="38"/>
+            <punto>
+                <longitud unidad="grados">11.36981121584872</longitud>
+                <latitud unidad="grados">43.99707792153124</latitud>
+                <altitud unidad="metros">261</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t46" sector="3">
+            <distancia unidad="metros" value="65"/>
+            <punto>
+                <longitud unidad="grados">11.36982298478978</longitud>
+                <latitud unidad="grados">43.9964880626526</latitud>
+                <altitud unidad="metros">259</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t47" sector="3">
+            <distancia unidad="metros" value="35"/>
+            <punto>
+                <longitud unidad="grados">11.36959355861114</longitud>
+                <latitud unidad="grados">43.99621728917207</latitud>
+                <altitud unidad="metros">259</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t48" sector="3">
+            <distancia unidad="metros" value="398"/>
+            <punto>
+                <longitud unidad="grados">11.36665641591548</longitud>
+                <latitud unidad="grados">43.99332715173505</latitud>
+                <altitud unidad="metros">260</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t49" sector="3">
+            <distancia unidad="metros" value="46"/>
+            <punto>
+                <longitud unidad="grados">11.36657396628192</longitud>
+                <latitud unidad="grados">43.99291564088815</latitud>
+                <altitud unidad="metros">260</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t50" sector="3">
+            <distancia unidad="metros" value="34"/>
+            <punto>
+                <longitud unidad="grados">11.36675193654663</longitud>
+                <latitud unidad="grados">43.99263274167893</latitud>
+                <altitud unidad="metros">259</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t51" sector="3">
+            <distancia unidad="metros" value="35"/>
+            <punto>
+                <longitud unidad="grados">11.36712053708272</longitud>
+                <latitud unidad="grados">43.99245161417832</latitud>
+                <altitud unidad="metros">256</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t52" sector="3">
+            <distancia unidad="metros" value="36"/>
+            <punto>
+                <longitud unidad="grados">11.36757396218065</longitud>
+                <latitud unidad="grados">43.99244818752947</latitud>
+                <altitud unidad="metros">254</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t53" sector="3">
+            <distancia unidad="metros" value="37"/>
+            <punto>
+                <longitud unidad="grados">11.36802747206989</longitud>
+                <latitud unidad="grados">43.99251481172107</latitud>
+                <altitud unidad="metros">252</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t54" sector="3">
+            <distancia unidad="metros" value="55"/>
+            <punto>
+                <longitud unidad="grados">11.3685141863136</longitud>
+                <latitud unidad="grados">43.99286434687121</latitud>
+                <altitud unidad="metros">249</altitud>
+            </punto>
+        </tramo>
+        <tramo id="t55" sector="3">
+            <distancia unidad="metros" value="337"/>
+            <punto>
+                <longitud unidad="grados">11.37022461355528</longitud>
+                <latitud unidad="grados">43.99563971665162</latitud>
+                <altitud unidad="metros">253</altitud>
+            </punto>
+        </tramo>
+    </tramos>
+
+
+    <multimedia>
+        <fotos>
+            <foto src="multimedia/Panorama.jpg" descripcion="Panorámica del circuito"/>
+        </fotos>
+        <videos>
+            <video src="multimedia/OnboardExample.mp4" duracion="PT2S" descripcion="Onboard vuelta rápida"/>
+        </videos>
+    </multimedia>
+
+    <resultados>
+        <vencedor>
+            <nombre>Marc Márquez</nombre>
+            <tiempo unidad="segundos">2469.214</tiempo>
+        </vencedor>
+
+        <podium>
+            <puesto posicion="1" pais="España" puntos="545">
+                <piloto>Marc Márquez</piloto>
+            </puesto>
+            <puesto posicion="2" pais="España" puntos="467">
+                <piloto>Álex Márquez</piloto>
+            </puesto>
+            <puesto posicion="3" pais="Italia" puntos="353">
+                <piloto>Marco Bezzecchi</piloto>
+            </puesto>
+        </podium>
+    </resultados>
+
+    <referencias>
+        <referencia sitio="Web oficial">https://www.mugellocircuit.com</referencia>
+        <referencia sitio="Wikipedia">https://es.wikipedia.org/wiki/Autódromo_Internacional_del_Mugello</referencia>
+        <referencia sitio="Artículo">https://tips.gg/es/article/mugello-circuit-motogp-overview-and-notable-performances/</referencia>
+    </referencias>
+
+
+</circuito>

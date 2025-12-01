@@ -472,10 +472,9 @@
     <multimedia>
         <fotos>
             <foto src="multimedia/Panorama.jpg" descripcion="Panorámica del circuito"/>
-            <foto src="multimedia/RectaMeta.jpg" descripcion="Recta de meta"/>
         </fotos>
         <videos>
-            <video src="multimedia/OnboardExample.mp4" duracion="00:02:30" descripcion="Onboard vuelta rápida"/>
+            <video src="multimedia/OnboardExample.mp4" duracion="PT2S" descripcion="Onboard vuelta rápida"/>
         </videos>
     </multimedia>
 
