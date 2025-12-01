@@ -221,4 +221,4 @@ def xml2html(xml_path: str, html_path: str):
 
 if __name__ == "__main__":
     xml2html("circuitoEsquema.xml", "InfoCircuito.html")
-    print("Generado InfoCircuito.html enlazando estilo.css")
+    print("Generado InfoCircuito.html")

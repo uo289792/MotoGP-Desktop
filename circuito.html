@@ -9,6 +9,11 @@
     <title>MotoGP-Circuito</title>
 
     <link rel="stylesheet" href="estilo/estilo.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY" defer></script>
+    <script src="js/circuito.js" defer></script>
+
 </head>
 <body>
     <header>
@@ -28,5 +33,41 @@
 
     <p class="migas">Estás en: <a href="index.html">Inicio</a> >> Circuito</p>
 
+    <main role="main">
+    <!-- Ejercicio 1: API File (InfoCircuito.html) -->
+    <section aria-labelledby="info-circuito">
+      <h2 id="info-circuito">Información del circuito (API File)</h2>
+      <p>Selecciona el archivo InfoCircuito.html generado en la sesión de XML.</p>
+
+      <input type="file" accept=".html,text/html" aria-label="Seleccionar archivo InfoCircuito.html">
+      <article aria-live="polite" aria-label="Contenido del archivo InfoCircuito.html"></article>
+    </section>
+
+    <!-- Ejercicio 2: API File (altimetria.svg) -->
+    <section aria-labelledby="altimetria">
+      <h2 id="altimetria">Altimetría del circuito (SVG)</h2>
+      <p>Selecciona el archivo altimetria.svg generado en la sesión de XML.</p>
+
+      <input type="file" accept=".svg,image/svg+xml" aria-label="Seleccionar archivo altimetria.svg">
+      <figure aria-label="Gráfico de altimetría">
+        <figcaption>Gráfico de altimetría cargado desde archivo SVG</figcaption>
+        <!-- El SVG se insertará aquí -->
+        <section aria-live="polite"></section>
+      </figure>
+    </section>
+
+    <!-- Ejercicio 3: Mapas y KML (div permitido por el guion) -->
+    <section aria-labelledby="mapa">
+      <h2 id="mapa">Mapa dinámico del circuito (KML)</h2>
+      <p>Selecciona el archivo circuito.kml para visualizar el circuito sobre el mapa.</p>
+
+      <input type="file" accept=".kml,application/vnd.google-earth.kml+xml" aria-label="Seleccionar archivo circuito.kml">
+
+      <!-- Contenedor del mapa (div permitido) -->
+      <div role="region" aria-label="Mapa dinámico del circuito"></div>
+    </section>
+  </main>
+
 </body>
 </html>
+
