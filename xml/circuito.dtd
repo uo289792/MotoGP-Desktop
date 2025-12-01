@@ -14,21 +14,28 @@
 
 <!ELEMENT carrera (fecha, hora, numVueltas)>
 <!ELEMENT fecha (#PCDATA)>
+<!ATTLIST fecha formato CDATA #REQUIRED>
 <!ELEMENT hora (#PCDATA)>
+<!ATTLIST hora zona CDATA #REQUIRED>
 <!ELEMENT numVueltas (#PCDATA)>
 
 <!ELEMENT origen (longitud, latitud, altitud)>
 <!ELEMENT longitud (#PCDATA)>
+<!ATTLIST longitud unidad CDATA #REQUIRED>
 <!ELEMENT latitud (#PCDATA)>
+<!ATTLIST latitud unidad CDATA #REQUIRED>
 <!ELEMENT altitud (#PCDATA)>
 <!ATTLIST altitud unidad CDATA #REQUIRED>
 
 <!ELEMENT tramos (tramo+)>
 <!ELEMENT tramo (distancia, punto)>
 <!ATTLIST tramo id ID #REQUIRED sector CDATA #REQUIRED>
+
 <!ELEMENT distancia EMPTY>
 <!ATTLIST distancia unidad CDATA #REQUIRED value CDATA #REQUIRED>
+
 <!ELEMENT punto (longitud, latitud, altitud)>
+
 
 
 <!ELEMENT multimedia (fotos, videos)>
