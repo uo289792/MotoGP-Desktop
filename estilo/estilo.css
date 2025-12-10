@@ -19,7 +19,12 @@ body {
 /* Selector: header → especificidad 0,0,1 */
 header {
   background-color: #189ab4; /* Blue Grotto */
-  color: #ffffff; /* White */
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1em;
+  flex-wrap: nowrap; /* evita que los elementos se envuelvan en varias filas */
 }
 
 /* Selector: a → especificidad 0,0,1 */

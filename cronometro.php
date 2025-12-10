@@ -30,7 +30,7 @@ class Cronometro {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-     <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="author" content="David Muños Río" />
     <meta name="description" content="Cronometro con php del proyecto MotoGP-Desktop" />
     <meta name="keywords" content="MotoGP, MotoGP-Desktop, cronometro, tiempo" />
