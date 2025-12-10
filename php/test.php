@@ -134,79 +134,97 @@ if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['accion'])){
     <link rel="stylesheet" href="../estilo/estilo.css">
 </head>
 <body>
-<main>
-<h1>Prueba de Usabilidad - MotoGP</h1>
+    <main>       
+    <header>
+            <h1>MotoGP Desktop</h1>
+            
+            <nav aria-label="Menú principal">
+                <a href="index.html" title="Inicio" class="active">Inicio</a>
+                <a href="piloto.html" title="Información del piloto">Piloto</a>
+                <a href="circuito.html" title="Información de circuitos">Circuito</a>
+                <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
+                <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
+                <a href="juegos.html" title="Juegos">Juegos</a>
+                <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
+            </nav>
+            
+    </header>
 
-<?php if($msg): ?><p class="msg-ok"><?= htmlspecialchars($msg) ?></p><?php endif; ?>
-<?php if($error): ?><p class="msg-error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
+    <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Test de Usabilidad</p>
 
-<form method="post">
-<?php if(!isset($_POST['accion']) || $_POST['accion']!=='arrancar'): ?>
-    <label for="codigo_usuario">Código de usuario:</label>
-    <input type="text" name="codigo_usuario" id="codigo_usuario" required><br><br>
 
-    <label for="profesion">Profesión:</label>
-    <input type="text" name="profesion" id="profesion" required><br><br>
+    <h2>Prueba de Usabilidad - MotoGP</h2>
 
-    <label for="edad">Edad:</label>
-    <input type="number" name="edad" id="edad" required><br><br>
+    <?php if($msg): ?><p class="msg-ok"><?= htmlspecialchars($msg) ?></p><?php endif; ?>
+    <?php if($error): ?><p class="msg-error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
 
-    <label for="genero">Género:</label>
-    <select name="genero" id="genero" required>
-        <option value="">--Selecciona--</option>
-        <option value="M">Masculino</option>
-        <option value="F">Femenino</option>
-        <option value="O">Otro</option>
-    </select><br><br>
+    <form method="post">
+    <?php if(!isset($_POST['accion']) || $_POST['accion']!=='arrancar'): ?>
+        <label for="codigo_usuario">Código de usuario:</label>
+        <input type="text" name="codigo_usuario" id="codigo_usuario" required><br><br>
 
-    <label for="pericia">Pericia informática:</label>
-    <select name="pericia" id="pericia" required>
-        <option value="">--Selecciona--</option>
-        <option value="baja">Baja</option>
-        <option value="media">Media</option>
-        <option value="alta">Alta</option>
-    </select><br><br>
+        <label for="profesion">Profesión:</label>
+        <input type="text" name="profesion" id="profesion" required><br><br>
 
-    <label for="dispositivo_id">Dispositivo:</label>
-    <select name="dispositivo_id" id="dispositivo_id" required>
-        <option value="1">Ordenador</option>
-        <option value="2">Tableta</option>
-        <option value="3">Teléfono</option>
-    </select><br><br>
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad" required><br><br>
 
-    <label for="valoracion">Valoración general (0-10):</label>
-    <input type="number" name="valoracion" id="valoracion" min="0" max="10" required><br><br>
+        <label for="genero">Género:</label>
+        <select name="genero" id="genero" required>
+            <option value="">--Selecciona--</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="O">Otro</option>
+        </select><br><br>
 
-    <button type="submit" name="accion" value="arrancar">Iniciar prueba</button>
+        <label for="pericia">Pericia informática:</label>
+        <select name="pericia" id="pericia" required>
+            <option value="">--Selecciona--</option>
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+        </select><br><br>
 
-<?php else: ?>
-    <?php
-    // Preguntas relacionadas con la base de datos y estructura del proyecto
-    $preguntas = [
-        "¿Cuál es la profesión asociada al usuario?",
-        "¿Qué dispositivos se han registrado en la base de datos?",
-        "¿Qué campo identifica de forma única a cada usuario?",
-        "¿Qué tipo de dato almacena la pericia informática?",
-        "¿Qué tabla contiene los comentarios del facilitador?",
-        "¿Qué tabla almacena los resultados de la prueba?",
-        "¿Qué campo indica si la prueba se completó?",
-        "¿Cómo se guarda el tiempo empleado en la prueba?",
-        "¿Qué tipo de datos se guarda en la columna propuestas_mejora?",
-        "¿Qué relación existe entre usuarios y resultados_prueba?"
-    ];
-    ?>
+        <label for="dispositivo_id">Dispositivo:</label>
+        <select name="dispositivo_id" id="dispositivo_id" required>
+            <option value="1">Ordenador</option>
+            <option value="2">Tableta</option>
+            <option value="3">Teléfono</option>
+        </select><br><br>
 
-    <?php foreach($preguntas as $i => $q): ?>
-        <label for="pregunta<?=($i+1)?>"><?=($i+1)?>. <?=htmlspecialchars($q)?></label>
-        <input type="text" name="pregunta<?=($i+1)?>" id="pregunta<?=($i+1)?>" required><br><br>
-    <?php endforeach; ?>
+        <label for="valoracion">Valoración general (0-10):</label>
+        <input type="number" name="valoracion" id="valoracion" min="0" max="10" required><br><br>
 
-    <label for="comentarios_observador">Comentarios del observador:</label>
-    <textarea name="comentarios_observador" id="comentarios_observador"></textarea><br><br>
+        <button type="submit" name="accion" value="arrancar">Iniciar prueba</button>
 
-    <button type="submit" name="accion" value="terminar">Terminar prueba</button>
-<?php endif; ?>
-</form>
-</main>
+    <?php else: ?>
+        <?php
+        // Preguntas relacionadas con la base de datos y estructura del proyecto
+        $preguntas = [
+            "¿Cuál es la profesión asociada al usuario?",
+            "¿Qué dispositivos se han registrado en la base de datos?",
+            "¿Qué campo identifica de forma única a cada usuario?",
+            "¿Qué tipo de dato almacena la pericia informática?",
+            "¿Qué tabla contiene los comentarios del facilitador?",
+            "¿Qué tabla almacena los resultados de la prueba?",
+            "¿Qué campo indica si la prueba se completó?",
+            "¿Cómo se guarda el tiempo empleado en la prueba?",
+            "¿Qué tipo de datos se guarda en la columna propuestas_mejora?",
+            "¿Qué relación existe entre usuarios y resultados_prueba?"
+        ];
+        ?>
+
+        <?php foreach($preguntas as $i => $q): ?>
+            <label for="pregunta<?=($i+1)?>"><?=($i+1)?>. <?=htmlspecialchars($q)?></label>
+            <input type="text" name="pregunta<?=($i+1)?>" id="pregunta<?=($i+1)?>" required><br><br>
+        <?php endforeach; ?>
+
+        <label for="comentarios_observador">Comentarios del observador:</label>
+        <textarea name="comentarios_observador" id="comentarios_observador"></textarea><br><br>
+
+        <button type="submit" name="accion" value="terminar">Terminar prueba</button>
+    <?php endif; ?>
+    </form>
+    </main>
 </body>
 </html>
