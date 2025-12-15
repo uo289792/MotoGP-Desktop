@@ -37,7 +37,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   </head>
   <body>
-    <main>
+    <main>       
+    <header>
+        <h1>MotoGP Desktop</h1> 
+        <nav aria-label="Menú principal">
+            <a href="index.html" title="Inicio" class="active">Inicio</a>
+            <a href="piloto.html" title="Información del piloto">Piloto</a>
+            <a href="circuito.html" title="Información de circuitos">Circuito</a>
+            <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
+            <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
+            <a href="juegos.html" title="Juegos">Juegos</a>
+            <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
+        </nav>
+      </header>
+
+      <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Configuración de la base de datos</p>
+
       <h1>Configuración - Test de Usabilidad</h1>
       <p>Operaciones disponibles sobre la base de datos de pruebas.</p>
 
