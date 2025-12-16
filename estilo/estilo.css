@@ -102,6 +102,14 @@ caption {
   margin-bottom: 0.5em;
 }
 
+video {
+ width:100%;
+ height:auto;
+}
+audio {
+ width:100%;
+}
+
 /* Especificidad: 001 */
 footer {
   background-color: #05445e;
