@@ -6,8 +6,8 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
-  row-gap: 1rem; 
-  padding: 6rem;  
+  gap:1rem;
+  padding: 5rem;  
 } 
 
 /* especificidad: 002 */
@@ -34,10 +34,11 @@ main article h3 {
 @media (max-width: 600px) {
   main {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
     padding: 0rem;  
   }
 
   main article { 
-    aspect-ratio: 1 / 1; 
+    width: 100%;
   }
 }
