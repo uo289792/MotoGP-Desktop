@@ -17,8 +17,8 @@
     <header>
         <h1>MotoGP Desktop</h1> 
         <nav aria-label="Menú principal">
-            <a href="index.html" title="Inicio" class="active">Inicio</a>
-            <a href="piloto.html" title="Información del piloto">Piloto</a>
+            <a href="index.html" title="Inicio">Inicio</a>
+            <a href="piloto.html" title="Información del piloto" class="active">Piloto</a>
             <a href="circuito.html" title="Información de circuitos">Circuito</a>
             <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
             <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
@@ -90,46 +90,40 @@
         <h3>Resultados recientes</h3>
 
         <table>
-                <caption>Resultados de Fabio Quartararo</caption>
+            <caption>Resultados de Fabio Quartararo</caption>
 
-                <thead>
-                    <tr>
-                        <th id="th-dato" scope="col">Dato</th>
-                        <th id="th-valor" scope="col">Valor</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <tr>
-                        <td headers="th-dato">Temporada</td>
-                        <td headers="th-valor">2024</td>
-                    </tr>
+            <tbody>
+                <tr>
+                    <th headers="row" id="temporadas">Temporada</th>
+                    <td headers="temporadas">2024</td>
+                </tr>
 
-                    <tr>
-                        <td headers="th-dato">Puntos</td>
-                        <td headers="th-valor">113</td>
-                    </tr>
+                <tr>
+                    <th headers="row" id="puntos">Puntos</th>
+                    <td headers="puntos">113</td>
+                </tr>
 
-                    <tr>
-                        <td headers="th-dato">Posición final</td>
-                        <td headers="th-valor">13º</td>
-                    </tr>
+                <tr>
+                    <th headers="row" id="posicion_final">Posición final</th>
+                    <td headers="posicion_final">13º</td>
+                </tr>
 
-                    <tr>
-                        <td headers="th-dato">Poles</td>
-                        <td headers="th-valor">0</td>
-                    </tr>
+                <tr>
+                    <th headers="row" id="polos">Poles</th>
+                    <td headers="polos">0</td>
+                </tr>
 
-                    <tr>
-                        <td headers="th-dato">Victorias</td>
-                        <td headers="th-valor">0</td>
-                    </tr>
+                <tr>
+                    <th headers="row" id="victorias">Victorias</th>
+                    <td headers="victorias">0</td>
+                </tr>
 
-                    <tr>
-                        <td headers="th-dato">Podios</td>
-                        <td headers="th-valor">0</td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <th headers="row" id="podios">Podios</th>
+                    <td headers="podios">0</td>
+                </tr>
+            </tbody>
         </table>
         </section>
 

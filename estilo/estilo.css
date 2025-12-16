@@ -3,9 +3,10 @@
 /* ==================================================
    Colores elegidos:
    Navy Blue: #05445e
-   Blue Grotto: #189ab4
    Baby Blue: #d4f1f4
    White: #ffffff
+   Black: #000000
+   Celadón Claro: #A8BBB0
 ================================================== */
 
 /* Selector: body → especificidad 0,0,1 */
@@ -13,18 +14,33 @@ body {
   background-color: #d4f1f4; /* Baby Blue */
   color: #05445e; /* Navy Blue */
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0em;
+}
+
+/* Especificidad: 001 */
+main {
+    margin: 1em;
 }
 
 /* Selector: header → especificidad 0,0,1 */
 header {
   background-color: #05445e; /* Blue Grotto */
   color: #ffffff;
+  padding: 1em;
+  text-align: center;
 }
 
 /* Selector: a → especificidad 0,0,1 */
 header a {
   color:  #ffffff;  /* White */
   text-decoration: none;
+}
+
+/* Especificidad: 002*/
+header + p {
+    background-color: #A8BBB0;
+    padding: 1em 1em;
+    margin-top: 0em;
 }
 
 /* Selector: h1 → especificidad 0,0,1 */
@@ -44,12 +60,55 @@ header nav a.active {
     color: #FFF894;
 }
 
+/* Especificidad: 003*/
+header + p > a {
+  font-weight: bold;
+}
+
+/* Especificidad: 013*/
+header + p > a:link, header + p > a:visited {
+  color: #000000;
+}
+
 /* Especificidad: 001 */
-footer {
+table{
+    border-collapse: collapse;
+    width: 30%;
+    font-size: 1.1em;
+}
+
+/* Especificidad: 001 */
+th, td {
+    padding: 0.5em 1em;
+    border: 0.1em solid #000000;
+    text-align: left;
+}
+
+/* Especificidad: 001 */
+th {
     background-color: #05445e;
     color: #ffffff;
-    padding: 1em;
-    margin-top: 2em;
+}
+
+/* Especificidad: 001 */
+td {
+    background-color: #A8BBB0;
+    color: #000000;
+}
+
+/* Especificidad: 001 */
+caption {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+/* Especificidad: 001 */
+footer {
+  background-color: #05445e;
+  color: #ffffff;
+  padding: 1em;
+  margin-top: 1em;
+  text-align: center;
 }
 
 
