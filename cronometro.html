@@ -10,7 +10,9 @@
 
     <link rel="stylesheet" href="estilo/estilo.css" />
     <link rel="stylesheet" href="estilo/layout.css" />
-     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
+
+    <script src="js/cronometro.js"></script>
 
 </head>
 <body>
@@ -31,21 +33,24 @@
     <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> <strong>Cronómetro</strong></p>
     
     <main>
-    <h2>Cronómetro</h2>
+        <h2>Cronómetro</h2>
 
-    <p>00:00.0</p>
+        <p>00:00.0</p>
 
-    <p>
-      <button type="button" onclick="window.cronometro.arrancar()">Arrancar</button>
-      <button type="button" onclick="window.cronometro.parar()">Parar</button>
-      <button type="button" onclick="window.cronometro.reiniciar()">Reiniciar</button>
-    </p>
-  </main>
+        <p>
+        <button type="button" onclick="window.cronometro.arrancar()">Arrancar</button>
+        <button type="button" onclick="window.cronometro.parar()">Parar</button>
+        <button type="button" onclick="window.cronometro.reiniciar()">Reiniciar</button>
+        </p>
+    </main>
    
-    <script src="js/cronometro.js"></script>
     <script>
         window.cronometro = new Cronometro();
     </script>
+
+    <footer>
+        <p>&copy; David Muñoz Río - 2025</p>
+    </footer>
 
 </body>
 </html>

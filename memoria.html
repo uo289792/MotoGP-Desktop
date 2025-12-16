@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="author" content="David Muños Río" />
-    <meta name="description" content="Información de ayuda del proyecto MotoGP-Desktop - en desarrollo" />
-    <meta name="keywords" content="MotoGP, MotoGP-Desktop, pilotos, circuito, juego, cartas" />
+    <meta name="description" content="Juegos de memoria sobre la MotoGP" />
+    <meta name="keywords" content="MotoGP, MotoGP-Desktop, escuderías, juego, cartas, memoria" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoGP-Ayuda</title>
 
@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="estilo/layout-cards.css">
     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 
+    <script src="js/cronometro.js"></script>
+    <script src="js/memoria.js"></script>
 
 </head>
 <body>
@@ -38,72 +40,74 @@
          <p>00:00.0</p>
 
         <!-- 12 cartas: 6 pares (Honda, Yamaha, Ducati, KTM, Aprilia, MotoGP) -->
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="honda">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/honda.svg" alt="Logo-Honda">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="honda">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
-            <img src="multimedia/logos/honda.svg" alt="Logo-Honda">
+            <img src="multimedia/logos/honda.svg" >
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="yamaha">
-            <h3>Memory Card</h3>
-            <img src="multimedia/logos/yamaha.svg" alt="Logo-Yamaha">
-        </article>
-
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="yamaha">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/yamaha.svg" alt="Logo-Yamaha">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="ducati">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
+            <h3>Memory Card</h3>
+            <img src="multimedia/logos/yamaha.svg" alt="Logo-Yamaha">
+        </article>
+
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/ducati.svg" alt="Logo-Ducati">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="ducati">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/ducati.svg" alt="Logo-Ducati">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="ktm">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/ktm.svg" alt="Logo-KTM">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="ktm">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/ktm.svg" alt="Logo-KTM">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="aprilia">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/aprilia.svg" alt="Logo-Aprilia">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="aprilia">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/aprilia.svg" alt="Logo-Aprilia">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="motogp">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/motogp.svg" alt="Logo-MotoGP">
         </article>
 
-        <article onclick="window.juegoMemoria.voltearCarta(this)" data-card="motogp">
+        <article onclick="window.juegoMemoria.voltearCarta(this)">
             <h3>Memory Card</h3>
             <img src="multimedia/logos/motogp.svg" alt="Logo-MotoGP">
         </article>
     </main>
 
-    <script src="js/cronometro.js"></script>
-    <script src="js/memoria.js"></script>
     <script>
         window.juegoMemoria = new Memoria();
     </script>
+
+    <footer>
+        <p>&copy; David Muñoz Río - 2025</p>
+    </footer>
 
 </body>
 </html>

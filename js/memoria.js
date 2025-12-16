@@ -128,42 +128,33 @@ class Memoria {
   }
   
 
-comprobarPareja() {
-  // Aseguramos que existen ambas cartas
-  if (!this.primera_carta || !this.segunda_carta) return;
-
-  // Accedemos a la imagen interna (segundo hijo dentro del <article>)
-  const img1 = this.primera_carta.children[1];
-  const img2 = this.segunda_carta.children[1];
-
-  // Comprobamos que existen ambas imágenes
-  if (!img1 || !img2) return;
-
-  // Obtenemos el atributo 'src' de cada imagen
-  const src1 = img1.getAttribute('src');
-  const src2 = img2.getAttribute('src');
-
-  (src1 === src2) ? this.deshabilitarCartas() : this.cubrirCartas();
-}
-
-comprobarPareja() {
+  comprobarPareja() {
+    // Aseguramos que existen ambas cartas
     if (!this.primera_carta || !this.segunda_carta) return;
 
-    // preferimos comparar por atributo data-card (más robusto), si no, por img.src
-    const a = this.primera_carta.getAttribute('data-card');
-    const b = this.segunda_carta.getAttribute('data-card');
+    // Accedemos a la imagen interna (segundo hijo dentro del <article>)
+    const img1 = this.primera_carta.children[1];
+    const img2 = this.segunda_carta.children[1];
 
-    if (a !== null && b !== null) {
-      // operador ternario: si iguales -> deshabilitar, si no -> cubrir
-      (a === b) ? this.deshabilitarCartas() : this.cubrirCartas();
-    } else {
-      // fallback: comparar src de la imagen interior
-      const img1 = this.primera_carta.querySelector('img');
-      const img2 = this.segunda_carta.querySelector('img');
-      const s1 = img1 ? img1.getAttribute('src') : null;
-      const s2 = img2 ? img2.getAttribute('src') : null;
-      (s1 !== null && s1 === s2) ? this.deshabilitarCartas() : this.cubrirCartas();
-    }
+    // Comprobamos que existen ambas imágenes
+    if (!img1 || !img2) return;
+
+    // Obtenemos el atributo 'src' de cada imagen
+    const src1 = img1.getAttribute('src');
+    const src2 = img2.getAttribute('src');
+
+    (src1 === src2) ? this.deshabilitarCartas() : this.cubrirCartas();
+  }
+
+  comprobarPareja() {
+    if (!this.primera_carta || !this.segunda_carta) return;
+    
+    const img1 = this.primera_carta.querySelector('img');
+    const img2 = this.segunda_carta.querySelector('img');
+    const s1 = img1 ? img1.getAttribute('src') : null;
+    const s2 = img2 ? img2.getAttribute('src') : null;
+    (s1 !== null && s1 === s2) ? this.deshabilitarCartas() : this.cubrirCartas();
+    
   }
 
   // Método principal: voltearCarta (llamado desde onclick="window.juegoMemoria.voltearCarta(this)")

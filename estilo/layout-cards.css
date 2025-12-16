@@ -6,8 +6,8 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
-  gap: 1rem;
-  padding: 5rem;  
+  row-gap: 1rem; 
+  padding: 6rem;  
 } 
 
 /* especificidad: 002 */
@@ -26,7 +26,7 @@ main p {
 
 /* especificidad: 003 */
 main article h3 {
-  color: white;           /* color del texto en blanco */
+  color: #ffffff;           /* color del texto en blanco */
   text-align: center;
 }
 
