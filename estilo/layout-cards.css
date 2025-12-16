@@ -24,6 +24,10 @@ main p {
   font-size: 2rem;        
 }
 
+main article { 
+  width: 100%;
+}
+
 /* especificidad: 003 */
 main article h3 {
   color: #ffffff;           /* color del texto en blanco */
@@ -36,9 +40,5 @@ main article h3 {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
     padding: 0rem;  
-  }
-
-  main article { 
-    width: 100%;
   }
 }
