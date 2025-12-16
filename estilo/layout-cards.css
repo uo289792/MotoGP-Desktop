@@ -28,8 +28,8 @@ main article {
   width: 100%;
 }
 
-/* especificidad: 003 */
-main article h3 {
+/* especificidad: 002 */
+article h3 {
   color: #ffffff;           /* color del texto en blanco */
   text-align: center;
 }

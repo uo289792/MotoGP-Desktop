@@ -1,81 +1,71 @@
-// js/carrusel.js
-// Requiere jQuery 3.x
+// Requiere jQuery 3.7.1
 
 class Carrusel {
 
-  constructor() {
-    this.busqueda = "Autodromo Internazionale del Mugello";
-    this.maximo = 5; 
-    this.apiKey = "5a0e1b7a34bd3bb29b3a1acae0dbf70c";
-    this.actual = 0;
-    this.intervalo = 3000;
-    this.timer = null;
-  }
+    constructor() {
+        this.busqueda = "MotoGP Mugello Circuit";
+        this.actual = 0;
+        this.maximo = 4; // 5 imágenes (0..4)
+        this.fotografias = [];
+    }
 
-  // --- TAREA 1: Llamada AJAX a Flickr ---
-  getFotografias() {
-    return $.ajax({
-      url: "https://api.flickr.com/services/rest/",
-      method: "GET",
-      data: {
-        method: "flickr.photos.search",
-        api_key: this.apiKey,
-        text: this.busqueda,
-        per_page: this.maximo,
-        format: "json",
-        nojsoncallback: 1
-      }
-    });
-  }
+    // TAREA 5: Obtener imágenes (JSONP, sin API key)
+    getFotografias() {
+        const flickrAPI =
+            "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
-  // --- TAREA 2: Procesar JSON ---
-  procesarJSONFotografias(json) {
-    if (!json?.photos?.photo) return [];
+        $.getJSON(flickrAPI, {
+            tags: "MotoGP,Mugello",
+            tagmode: "all",
+            format: "json"
+        })
+        .done(this.procesarJSONFotografias.bind(this))
+        .fail(() => {
+            $("main").append("<p>Error al obtener las imágenes</p>");
+        });
+    }
 
-    return json.photos.photo.map(p => ({
-      url: `https://live.staticflickr.com/${p.server}/${p.id}_${p.secret}_z.jpg`,
-      title: p.title || ""
-    }));
-  }
+    // TAREA 6: Procesar JSON (5 fotografías)
+    procesarJSONFotografias(data) {
+        for (let i = 0; i <= this.maximo; i++) {
+            const foto = data.items[i];
+            const url = foto.media.m.replace("_m.", "_b.");
 
-  // --- TAREA 3: Mostrar imágenes con innerHTML ---
-  mostrarFotografias(fotos) {
-    const cont = document.querySelector("#carrusel-mugello");
+            this.fotografias.push({
+                url: url,
+                alt: "Imagen del circuito de Mugello (MotoGP)"
+            });
+        }
+        this.mostrarFotografias();
+    }
 
-    let html = "<article><h2>Imágenes del circuito de Mugello</h2><div class='carrusel'>";
+    // TAREA 7: Mostrar primera imagen
+    mostrarFotografias() {
+        const article = $("<article></article>");
+        const h2 = $("<h2>Imágenes del circuito de Mugello</h2>");
+        const img = $("<img>")
+            .attr("src", this.fotografias[this.actual].url)
+            .attr("alt", this.fotografias[this.actual].alt);
 
-    fotos.forEach((f, i) => {
-      html += `<img src="${f.url}" alt="${f.title}" style="display:${i === 0 ? 'block' : 'none'}">`;
-    });
+        article.append(h2);
+        article.append(img);
 
-    html += "</div></article>";
+        $("main").append(article);
 
-    cont.innerHTML = html;
+        // TAREA 8: Temporizador
+        setInterval(this.cambiarFotografia.bind(this), 3000);
+    }
 
-    // --- TAREA 8: cambiar con temporizador + bind() (OBLIGATORIO) ---
-    this.timer = setInterval(this.cambiarFotografia.bind(this), this.intervalo);
-  }
+    // TAREA 8: Cambio de imagen
+    cambiarFotografia() {
+        this.actual++;
 
-  // --- TAREA 4: Cambiar de foto ---
-  cambiarFotografia() {
-    const imgs = document.querySelectorAll("#carrusel-mugello img");
-    if (imgs.length === 0) return;
+        if (this.actual > this.maximo) {
+            this.actual = 0;
+        }
 
-    imgs[this.actual].style.display = "none";
-    this.actual = (this.actual + 1) % imgs.length;
-    imgs[this.actual].style.display = "block";
-  }
-
-  // --- TAREA 5: Inicializar todo ---
-  init() {
-    this.getFotografias()
-      .done(json => {
-        const fotos = this.procesarJSONFotografias(json);
-        if (fotos.length > 0) this.mostrarFotografias(fotos);
-        else document.querySelector("#carrusel-mugello").innerHTML = "<p>No se han encontrado imágenes.</p>";
-      })
-      .fail(() => {
-        document.querySelector("#carrusel-mugello").innerHTML = "<p>Error al obtener imágenes.</p>";
-      });
-  }
+        $("article img")
+            .attr("src", this.fotografias[this.actual].url)
+            .attr("alt", this.fotografias[this.actual].alt);
+    }
 }

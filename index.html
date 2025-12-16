@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="estilo/layout.css" />
     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/carrusel.js"></script>
+
 </head>
 <body>
     <header>
@@ -33,15 +36,10 @@
             <p>Proyecto de prácticas de Software y estándares para la Web.</p>
         </section>
     </main>
-
-    <section id="carrusel-mugello" aria-label="Carrusel de imágenes Mugello"></section>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/carrusel.js"></script>
-
+  
     <script>
         const carr = new Carrusel();
-        carr.init();
+        carr.getFotografias();
     </script>
 
     <footer>

@@ -28,4 +28,10 @@ header {
         flex-wrap: wrap;
         gap: 1em;
     }
+
+    /* Especificidad: 003 */
+    article h2 + img {
+        width: 100%;
+        height: auto;
+    }
 }
