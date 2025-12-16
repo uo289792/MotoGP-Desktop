@@ -38,6 +38,8 @@ class Cronometro {
     <title>MotoGP-Cronometro</title>
 
     <link rel="stylesheet" href="estilo/estilo.css" />
+    <link rel="stylesheet" href="estilo/layout.css" />
+
 </head>
 <body>
      <header>

@@ -1,5 +1,4 @@
-/* Datos personales: David Muños Río - UO289792 */
-/* Estilos generales del proyecto MotoGP-Desktop */
+/* David Muños Río - UO289792 */
 
 /* ==================================================
    Colores elegidos:
@@ -20,10 +19,6 @@ body {
 header {
   background-color: #05445e; /* Blue Grotto */
   color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em 1em;
 }
 
 /* Selector: a → especificidad 0,0,1 */
@@ -38,9 +33,23 @@ h1 {
   font-size: 2.5em;
 }
 
-nav a.active {
-  font-weight: bold;
-  text-decoration: underline;
+/* Especificidad: 003*/
+header nav a {
+    margin: 0.5em;
+    font-size: 1.2em;
+}
+
+/* Especificidad: 013 */
+header nav a.active {
+    color: #FFF894;
+}
+
+/* Especificidad: 001 */
+footer {
+    background-color: #05445e;
+    color: #ffffff;
+    padding: 1em;
+    margin-top: 2em;
 }
 
 

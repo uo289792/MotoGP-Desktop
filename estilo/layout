@@ -1,0 +1,31 @@
+/* David Muños Río - UO289792 */
+
+/* Especificidad: 001 */
+header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;  
+}
+
+@media only screen and (max-width: 600px) {
+    /* Especificidad: 001 */
+    header {
+        flex-direction: column;   /* redefinición de la propiedad flex-direction */
+        justify-content: center;  /* redefinición de la propiedad justify-content */         
+    }
+    
+     /* Especificidad: 002 */
+    header + p {
+        display: none;
+    }
+
+    /* Especificidad: 001 */
+    nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+}
