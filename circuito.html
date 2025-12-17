@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="author" content="David Muños Río" />
     <meta name="description" content="Circuito del proyecto MotoGP-Desktop" />
-    <meta name="keywords" content="MotoGP, MotoGP-Desktop, pilotos, circuito, meteorologia" />
+    <meta name="keywords" content="MotoGP, MotoGP-Desktop, circuito, altimetría" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoGP-Circuito</title>
 
@@ -12,67 +12,52 @@
     <link rel="stylesheet" href="estilo/layout.css" />
     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 
-
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzv2G5MPTtkkCESAux5qzsPxAV8EaEH2w"></script>
-    <script src="js/circuito.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzv2G5MPTtkkCESAux5qzsPxAV8EaEH2w&callback=initMap" defer></script>
+    <script src="js/circuito.js" defer></script>
 </head>
 <body>
     <header>
         <h1>MotoGP Desktop</h1> 
-        <nav aria-label="Menú principal">
-            <a href="index.html" title="Inicio">Inicio</a>
-            <a href="piloto.html" title="Información del piloto">Piloto</a>
-            <a href="circuito.html" title="Información de circuitos" class="active">Circuito</a>
-            <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
-            <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
-            <a href="juegos.html" title="Juegos">Juegos</a>
-            <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="piloto.html">Piloto</a>
+            <a href="circuito.html" class="active">Circuito</a>
+            <a href="meteorologia.html">Meteorología</a>
+            <a href="clasificaciones.php">Clasificaciones</a>
+            <a href="juegos.html">Juegos</a>
+            <a href="ayuda.html">Ayuda</a>
         </nav>
     </header>
 
-    <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <strong>Circuito</strong></p>
-
     <main role="main">
-    <!-- Ejercicio 1: API File (InfoCircuito.html) -->
-    <section aria-labelledby="info-circuito">
-      <h2 id="info-circuito">Información del circuito (API File)</h2>
-      <p>Selecciona el archivo InfoCircuito.html generado en la sesión de XML.</p>
+        <!-- Ejercicio 1: InfoCircuito.html -->
+        <section>
+            <h2>Información del circuito (API File)</h2>
+            <input type="file" accept=".html,text/html">
+            <article aria-live="polite"></article>
+        </section>
 
-      <input type="file" accept=".html,text/html" aria-label="Seleccionar archivo InfoCircuito.html">
-      <article aria-live="polite" aria-label="Contenido del archivo InfoCircuito.html"></article>
-    </section>
+        <!-- Ejercicio 2: altimetria.svg -->
+        <section>
+            <h2>Altimetría del circuito (SVG)</h2>
+            <input type="file" accept=".svg,image/svg+xml">
+            <figure>
+                <figcaption>Gráfico de altimetría cargado desde archivo SVG</figcaption>
+                <section aria-live="polite"></section>
+            </figure>
+        </section>
 
-    <!-- Ejercicio 2: API File (altimetria.svg) -->
-    <section aria-labelledby="altimetria">
-      <h2 id="altimetria">Altimetría del circuito (SVG)</h2>
-      <p>Selecciona el archivo altimetria.svg generado en la sesión de XML.</p>
+        <!-- Ejercicio 3: Mapas y KML -->
+        <section>
+            <h2>Mapa dinámico del circuito (KML)</h2>
+            <input type="file" accept=".kml,application/vnd.google-earth.kml+xml">
+            <div role="region" id="mapa"></div>
+        </section>
+    </main>
 
-      <input type="file" accept=".svg,image/svg+xml" aria-label="Seleccionar archivo altimetria.svg">
-      <figure aria-label="Gráfico de altimetría">
-        <figcaption>Gráfico de altimetría cargado desde archivo SVG</figcaption>
-        <!-- El SVG se insertará aquí -->
-        <section aria-live="polite"></section>
-      </figure>
-    </section>
-
-    <!-- Ejercicio 3: Mapas y KML (div permitido por el guion) -->
-    <section aria-labelledby="mapa">
-      <h2 id="mapa">Mapa dinámico del circuito (KML)</h2>
-      <p>Selecciona el archivo circuito.kml para visualizar el circuito sobre el mapa.</p>
-
-      <input type="file" accept=".kml,application/vnd.google-earth.kml+xml" aria-label="Seleccionar archivo circuito.kml">
-
-      <!-- Contenedor del mapa (div permitido) -->
-      <div role="region" aria-label="Mapa dinámico del circuito"></div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; David Muñoz Río - 2025</p>
-  </footer>
+    <footer>
+        <p>&copy; David Muñoz Río - 2025</p>
+    </footer>
 </body>
 </html>
-

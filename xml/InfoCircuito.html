@@ -1,36 +1,65 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>InfoCircuito</title>
-  <link rel="stylesheet" href="estilo.css">
+    <meta charset="UTF-8" />
+    <meta name="author" content="David Muños Río" />
+    <meta name="description" content="Información xml del proyecto MotoGP-Desktop" />
+    <meta name="keywords" content="MotoGP, MotoGP-Desktop, xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MotoGP-Información</title>
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <header role="banner">
+  <header>
     <h1>Información del circuito</h1>
   </header>
-  <main role="main">
-    <section aria-labelledby="datos-generales-del-circuito">
-      <h2 id="datos-generales-del-circuito">Datos generales del circuito</h2>
-      <dl>
-        <dt>Nombre</dt>
-        <dd>Autodromo Internazionale del Mugello</dd>
-        <dt>Caracteristicas</dt>
-        <dd><span class="child"><strong>longitudCircuito:</strong> 5243</span> <span class="child-attrs">longitudCircuito attrs: unidad=metros</span> <span class="child"><strong>anchura:</strong> 12</span> <span class="child-attrs">anchura attrs: unidad=metros</span> <span class="child"><strong>localidad:</strong> Borgo San Lorenzo</span> <span class="child"><strong>pais:</strong> Italia</span> <span class="child"><strong>patrocinador:</strong> Brembo</span></dd>
-        <dt>Carrera</dt>
-        <dd><span class="child"><strong>fecha:</strong> 2025-06-22</span> <span class="child"><strong>hora:</strong> 15:00</span> <span class="child-attrs">hora attrs: zona=CET</span> <span class="child"><strong>numVueltas:</strong> 22</span></dd>
-        <dt>Multimedia</dt>
-        <dd>&mdash;</dd>
-        <dt>Resultados</dt>
-        <dd>&mdash;</dd>
-        <dt>Referencias</dt>
-        <dd><span class="child"><strong>referencia:</strong> https://www.mugellocircuit.com</span> <span class="child-attrs">referencia attrs: sitio=Web oficial</span> <span class="child"><strong>referencia:</strong> https://es.wikipedia.org/wiki/Autódromo_Internacional_del_Mugello</span> <span class="child-attrs">referencia attrs: sitio=Wikipedia</span> <span class="child"><strong>referencia:</strong> https://tips.gg/es/article/mugello-circuit-motogp-overview-and-notable-performances/</span> <span class="child-attrs">referencia attrs: sitio=Artículo</span></dd>
-      </dl>
-
+  <main>
+    <section>
+      <h2>Fotos</h2>
+      <ul>
+        <li><img src="multimedia/Panorama.jpg" alt="Panorámica del circuito" /></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Videos</h2>
+      <ul>
+        <li><video src="multimedia/OnboardExample.mp4" controls>Onboard vuelta rápida</video></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Vencedor</h2>
+      <ul>
+        <li>Nombre: Marc Márquez</li>
+        <li>Tiempo: 2469.214</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Podium</h2>
+      <ul>
+        <li>Posición 1, País España, Puntos 545, Piloto Marc Márquez</li>
+        <li>Posición 2, País España, Puntos 467, Piloto Álex Márquez</li>
+        <li>Posición 3, País Italia, Puntos 353, Piloto Marco Bezzecchi</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Referencias</h2>
+      <ul>
+        <li><a href="https://www.mugellocircuit.com">Web oficial</a></li>
+        <li><a href="https://es.wikipedia.org/wiki/Autódromo_Internacional_del_Mugello">Wikipedia</a></li>
+        <li><a href="https://tips.gg/es/article/mugello-circuit-motogp-overview-and-notable-performances/">Artículo</a></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Datos generales del circuito</h2>
+      <ul>
+        <li>Nombre: Autodromo Internazionale del Mugello</li>
+        <li>Caracteristicas: </li>
+        <li>Carrera: </li>
+      </ul>
     </section>
   </main>
-  <footer role="contentinfo">
+  <footer>
     <p>Generado automáticamente desde circuitoEsquema.xml</p>
   </footer>
 </body>

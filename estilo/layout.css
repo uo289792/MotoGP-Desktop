@@ -1,4 +1,6 @@
 /* David Muños Río - UO289792 */
+/* MotoGP-Desktop*/
+/* Hoja de estilo para el layout general del proyecto */
 
 /* Especificidad: 001 */
 header {
@@ -9,6 +11,12 @@ header {
     justify-content: space-between;  
 }
 
+/* Especificidad: 002 */
+body > div {
+    width: 100%;
+    height: 50vh; /* altura relativa a la ventana */
+}
+
 @media only screen and (max-width: 600px) {
     /* Especificidad: 001 */
     header {
@@ -16,7 +24,7 @@ header {
         justify-content: center;  /* redefinición de la propiedad justify-content */         
     }
     
-     /* Especificidad: 002 */
+     /* Especificidad: 002 */S
     header + p {
         display: none;
     }
@@ -33,5 +41,10 @@ header {
     article h2 + img {
         width: 100%;
         height: auto;
+    }
+
+    /* Especificidad: 002 */
+    body > div {
+        height: 40vh;
     }
 }

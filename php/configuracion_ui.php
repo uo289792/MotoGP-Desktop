@@ -30,10 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!doctype html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
+    <meta name="author" content="David Muños Río" />
+    <meta name="description" content="Configuración de la base de datos del proyecto MotoGP-Desktop" />
+    <meta name="keywords" content="MotoGP, MotoGP-Desktop, configuracion, base de datos" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Configuración Test - MotoGP</title>
-    <link rel="stylesheet" href="../estilo/estilo.css">
+    <title>MotoGP-Configuración</title>
+
+    <link rel="stylesheet" href="../estilo/estilo.css" />
+    <link rel="stylesheet" href="../estilo/layout.css" />
 
   </head>
   <body>
@@ -41,39 +46,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <h1>MotoGP Desktop</h1> 
         <nav aria-label="Menú principal">
-            <a href="index.html" title="Inicio" class="active">Inicio</a>
+            <a href="index.html" title="Inicio">Inicio</a>
             <a href="piloto.html" title="Información del piloto">Piloto</a>
             <a href="circuito.html" title="Información de circuitos">Circuito</a>
             <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
             <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
-            <a href="juegos.html" title="Juegos">Juegos</a>
+            <a href="juegos.html" title="Juegos" class="active">Juegos</a>
             <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
         </nav>
       </header>
 
-      <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Configuración de la base de datos</p>
+      <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Configuración de la base de datos</p>
 
       <h1>Configuración - Test de Usabilidad</h1>
       <p>Operaciones disponibles sobre la base de datos de pruebas.</p>
 
       <?php if($msg): ?>
-        <p class="msg-ok"><?= htmlspecialchars($msg) ?></p>
+        <p><?= htmlspecialchars($msg) ?></p>
       <?php endif; ?>
 
       <?php if($error): ?>
-        <p class="msg-error"><?= htmlspecialchars($error) ?></p>
+        <p><?= htmlspecialchars($error) ?></p>
       <?php endif; ?>
 
       <form method="post">
-        <button class="btn" type="submit" name="accion" value="reiniciar">
+        <button type="submit" name="accion" value="reiniciar">
           Reiniciar datos (vaciar tablas)
         </button>
 
-        <button class="btn danger" type="submit" name="accion" value="eliminar">
+        <button type="submit" name="accion" value="eliminar">
           Eliminar base de datos
         </button>
 
-        <button class="btn info" type="submit" name="accion" value="exportar">
+        <button type="submit" name="accion" value="exportar">
           Exportar resultados (.csv)
         </button>
       </form>

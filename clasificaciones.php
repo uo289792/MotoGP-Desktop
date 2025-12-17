@@ -41,7 +41,7 @@ class Clasificacion {
 <head>
     <meta charset="UTF-8" />
     <meta name="author" content="David Muños Río" />
-    <meta name="description" content="Clasificaciones del proyecto MotoGP-Desktop - en desarrollo" />
+    <meta name="description" content="Clasificaciones del proyecto MotoGP-Desktop" />
     <meta name="keywords" content="MotoGP, MotoGP-Desktop, pilotos, circuito, clasificaciones" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoGP-Clasificaciones</title>
@@ -53,7 +53,7 @@ class Clasificacion {
 <body>
      <header>
         <h1>MotoGP Desktop</h1> 
-        <nav aria-label="Menú principal">
+        <nav>
             <a href="index.html" title="Inicio">Inicio</a>
             <a href="piloto.html" title="Información del piloto">Piloto</a>
             <a href="circuito.html" title="Información de circuitos">Circuito</a>
@@ -65,7 +65,7 @@ class Clasificacion {
     </header>
 
 
-    <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <strong>Clasificaciones</strong></p>
+    <p>Estás en: <a href="index.html">Inicio</a> >> <strong>Clasificaciones</strong></p>
 
     <main>
         <section>

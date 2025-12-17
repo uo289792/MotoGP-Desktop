@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['accion'])){
         </nav>
     </header>
 
-    <p class="migas">Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Test de Usabilidad</p>
+    <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Test de Usabilidad</p>
 
 
     <h2>Prueba de Usabilidad - MotoGP</h2>
