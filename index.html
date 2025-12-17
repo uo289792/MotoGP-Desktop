@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="author" content="David Muños Río" />
-    <meta name="description" content="Inicio del proyecto MotoGP-Desktop - en desarrollo" />
-    <meta name="keywords" content="MotoGP, moto, pilotos, circuito, meteorologia" />
+    <meta name="description" content="Inicio del proyecto MotoGP-Desktop" />
+    <meta name="keywords" content="MotoGP, moto, piloto, circuito, meteorologia" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MotoGP Desktop - Inicio</title>
 
@@ -14,6 +14,8 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="js/carrusel.js"></script>
+    <script src="js/noticias.js"></script>
+
 
 </head>
 <body>
@@ -40,6 +42,11 @@
     <script>
         const carr = new Carrusel();
         carr.getFotografias();
+    </script>
+
+    <script>
+        const noticias = new Noticias();
+        noticias.init();
     </script>
 
     <footer>

@@ -81,4 +81,4 @@ def xml2kml(xml_path: str, kml_path: str):
 
 if __name__ == "__main__":
     xml2kml("circuitoEsquema.xml", "circuito.kml")
-    print("Generado circuito.kml)
+    print("Generado circuito.kml") 

@@ -5,11 +5,10 @@ class Carrusel {
     constructor() {
         this.busqueda = "MotoGP Mugello Circuit";
         this.actual = 0;
-        this.maximo = 4; // 5 imágenes (0..4)
+        this.maximo = 4; 
         this.fotografias = [];
     }
 
-    // TAREA 5: Obtener imágenes (JSONP, sin API key)
     getFotografias() {
         const flickrAPI =
             "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
@@ -25,7 +24,6 @@ class Carrusel {
         });
     }
 
-    // TAREA 6: Procesar JSON (5 fotografías)
     procesarJSONFotografias(data) {
         for (let i = 0; i <= this.maximo; i++) {
             const foto = data.items[i];
@@ -39,7 +37,6 @@ class Carrusel {
         this.mostrarFotografias();
     }
 
-    // TAREA 7: Mostrar primera imagen
     mostrarFotografias() {
         const article = $("<article></article>");
         const h2 = $("<h2>Imágenes del circuito de Mugello</h2>");

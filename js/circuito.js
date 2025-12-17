@@ -159,7 +159,7 @@ class CargadorKML {
 
       // Marcador en el origen
       if (coords.length > 0) {
-        new google.maps.Marker({
+        new google.maps.marker.AdvancedMarkerElement({
           position: coords[0],
           map: this.map,
           title: 'Origen del circuito'
