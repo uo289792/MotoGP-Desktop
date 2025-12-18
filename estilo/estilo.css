@@ -6,12 +6,13 @@
    Colores elegidos:
    Navy Blue: #05445e
    Baby Blue: #d4f1f4
+   Blue Grotto: #189ab4
    White: #ffffff
    Black: #000000
    Celadón Claro: #A8BBB0
 ================================================== */
 
-/* Selector: body → especificidad 0,0,1 */
+/* Especificidad: 001 */
 body {
   background-color: #d4f1f4; /* Baby Blue */
   color: #05445e; /* Navy Blue */
@@ -24,7 +25,7 @@ main {
     margin: 1em;
 }
 
-/* Selector: header → especificidad 0,0,1 */
+/* Especificidad: 001 */
 header {
   background-color: #05445e; /* Blue Grotto */
   color: #ffffff;
@@ -32,7 +33,7 @@ header {
   text-align: center;
 }
 
-/* Selector: a → especificidad 0,0,1 */
+/* Especificidad: 002 */
 header a {
   color:  #ffffff;  /* White */
   text-decoration: none;
@@ -47,15 +48,14 @@ header + p {
 }
 
 /* Especificidad: 003*/
-header nav a {
-  margin: 0.5em;
-  font-size: 1.2em;
+header + p > a {
+  color: #05445e;
 }
 
 /* Especificidad: 003*/
-header + p > a {
-  font-weight: bold;
-  color: #05445e;
+header nav a {
+  margin: 0.5em;
+  font-size: 1.2em;
 }
 
 /* Especificidad: 013 */
@@ -86,12 +86,17 @@ caption {
 }
 
 video {
- width:30%;
+ width:40%;
  height:auto;
 }
 /* Especificidad: 001 */
 audio {
  width:40%;
+}
+
+/* Especificidad: 001 */
+figcaption {
+  font-weight: bold;
 }
 
 /* Especificidad: 001 */

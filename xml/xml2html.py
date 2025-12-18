@@ -4,8 +4,20 @@ import xml.etree.ElementTree as ET
 
 NS = {"u": "http://www.uniovi.es"}
 
+LABELS = {
+    "longitudCircuito": "Longitud del circuito",
+    "anchura": "Anchura",
+    "localidad": "Localidad",
+    "pais": "País",
+    "patrocinador": "Patrocinador",
+    "fecha": "Fecha",
+    "hora": "Hora",
+    "numVueltas": "Número de vueltas",
+    "nombre": "Nombre"
+}
+
 class Html:
-    def __init__(self, title="MotoGP-Información", css_href="estilo/estilo.css", lang="es"):
+    def __init__(self, title="MotoGP-Información", css_href="../estilo/estilo.css", lang="es"):
         self.title = title
         self.css_href = css_href
         self.lang = lang
@@ -27,13 +39,13 @@ class Html:
 """
 
     def open_body(self):
-        return "<body>\n  <header>\n    <h1>Información del circuito</h1>\n  </header>\n  <main>\n"
+        return "<body>\n  <main>\n"
 
     def close_body(self):
-        return "  </main>\n  <footer>\n    <p>Generado automáticamente desde circuitoEsquema.xml</p>\n  </footer>\n</body>\n</html>\n"
+        return "  </main>\n</body>\n</html>\n"
 
     def section(self, title, inner):
-        return f"    <section>\n      <h2>{title}</h2>\n{inner}    </section>\n"
+        return f"    <section>\n      <h3>{title}</h3>\n{inner}    </section>\n"
 
     def ul(self, items):
         out = ["      <ul>"]
@@ -51,71 +63,100 @@ class Html:
 def text_of(el):
     return (el.text or "").strip() if el is not None else ""
 
-def serialize_attributes(el):
-    if not el.attrib:
-        return ""
-    return ", ".join(f'{k}={v}' for k, v in el.attrib.items())
-
 def read_dom(path):
     return ET.parse(path).getroot()
+
+def format_with_unit(el):
+    val = text_of(el)
+    unidad = el.attrib.get("unidad")
+    zona = el.attrib.get("zona")
+    if unidad:
+        return f"{val} {unidad}"
+    if zona:
+        return f"{val} {zona}"
+    return val
 
 def build_info_sections(root):
     html = Html()
 
-    # Datos generales del circuito
-    items = []
-    for el in root.findall("./*", NS):
-        lname = el.tag.split("}", 1)[-1]
-        if lname in ("origen", "tramos"):
-            continue
-        # Especial: multimedia, resultados, referencias
-        if lname == "multimedia":
-            fotos = root.findall(".//u:fotos/u:foto", NS)
-            if fotos:
-                foto_items = []
-                for f in fotos:
-                    src = f.attrib.get("src")
-                    desc = f.attrib.get("descripcion", "")
-                    foto_items.append(f'<img src="{src}" alt="{desc}" />')
-                html.add(html.section("Fotos", html.ul(foto_items)))
-            videos = root.findall(".//u:videos/u:video", NS)
-            if videos:
-                video_items = []
-                for v in videos:
-                    src = v.attrib.get("src")
-                    desc = v.attrib.get("descripcion", "")
-                    video_items.append(f'<video src="{src}" controls>{desc}</video>')
-                html.add(html.section("Videos", html.ul(video_items)))
-            continue
-        elif lname == "resultados":
-            vencedor = root.find(".//u:vencedor", NS)
-            if vencedor is not None:
-                v_items = [f"{c.tag.split('}',1)[-1].capitalize()}: {text_of(c)}" for c in vencedor]
-                html.add(html.section("Vencedor", html.ul(v_items)))
-            podium = root.findall(".//u:podium/u:puesto", NS)
-            if podium:
-                podium_items = []
-                for p in podium:
-                    piloto = p.find("u:piloto", NS)
-                    podium_items.append(f"Posición {p.attrib.get('posicion')}, País {p.attrib.get('pais')}, Puntos {p.attrib.get('puntos')}, Piloto {text_of(piloto)}")
-                html.add(html.section("Podium", html.ul(podium_items)))
-            continue
-        elif lname == "referencias":
-            ref_items = []
-            for r in root.findall(".//u:referencia", NS):
-                sitio = r.attrib.get("sitio", "")
-                ref_items.append(f'<a href="{text_of(r)}">{sitio}</a>')
-            html.add(html.section("Referencias", html.ul(ref_items)))
-            continue
+    # --- Datos generales ---
+    general_items = []
+    nombre = root.find("./u:nombre", NS)
+    if nombre is not None:
+        general_items.append(f"{LABELS['nombre']}: {text_of(nombre)}")
 
-        val = text_of(el)
-        attrs = serialize_attributes(el)
-        if attrs:
-            val += f" ({attrs})"
-        items.append(f"{lname.capitalize()}: {val}")
+    caracteristicas = root.find("./u:caracteristicas", NS)
+    if caracteristicas is not None:
+        for child in caracteristicas.findall("./*", NS):
+            lname = child.tag.split("}", 1)[-1]
+            label = LABELS.get(lname, lname.capitalize())
+            general_items.append(f"{label}: {format_with_unit(child)}")
 
-    if items:
-        html.add(html.section("Datos generales del circuito", html.ul(items)))
+    carrera = root.find("./u:carrera", NS)
+    if carrera is not None:
+        for child in carrera.findall("./*", NS):
+            lname = child.tag.split("}", 1)[-1]
+            label = LABELS.get(lname, lname.capitalize())
+            general_items.append(f"{label}: {format_with_unit(child)}")
+
+    html.add(html.section("Datos generales del circuito", html.ul(general_items)))
+
+    # --- Multimedia como figuras ---
+    fotos = root.findall(".//u:fotos/u:foto", NS)
+    for f in fotos:
+        src = f.attrib.get("src")
+        desc = f.attrib.get("descripcion", "")
+        figure_html = f"""    <figure>
+        <img src="{src}" alt="{desc}" />
+        <figcaption>{desc}</figcaption>
+    </figure>\n"""
+        html.add(figure_html)
+
+    videos = root.findall(".//u:videos/u:video", NS)
+    for v in videos:
+        src = v.attrib.get("src")
+        desc = v.attrib.get("descripcion", "")
+        figure_html = f"""    <figure>
+        <video src="{src}" controls></video>
+        <figcaption>{desc}</figcaption>
+    </figure>\n"""
+        html.add(figure_html)
+
+    # --- Resultados ---
+    vencedor = root.find(".//u:vencedor", NS)
+    if vencedor is not None:
+        v_items = []
+        for c in vencedor:
+            lname = c.tag.split("}",1)[-1]
+            label = LABELS.get(lname, lname.capitalize())
+            val = text_of(c)
+            if lname == "tiempo":
+                val = f"{val} segundos"
+            v_items.append(f"{label}: {val}")
+        html.add(html.section("Vencedor tras la carrera", html.ul(v_items)))
+
+    podium = root.findall(".//u:podium/u:puesto", NS)
+    if podium:
+        podium_items = []
+        for p in podium:
+            piloto = text_of(p.find("u:piloto", NS))
+            pos = p.attrib.get("posicion")
+            pais = p.attrib.get("pais")
+            puntos = p.attrib.get("puntos")
+            podium_items.append(
+                f"Posición {pos}:<ul>"
+                f"<li>Piloto: {piloto}</li>"
+                f"<li>País: {pais}</li>"
+                f"<li>Puntos: {puntos}</li>"
+                f"</ul>"
+            )
+        html.add(html.section("Podium tras la carrera", html.ul(podium_items)))
+
+    # --- Referencias ---
+    referencias = root.findall(".//u:referencia", NS)
+    if referencias:
+        ref_items = [f'<a href="{text_of(r)}">{r.attrib.get("sitio","")}</a>' for r in referencias]
+        html.add(html.section("Referencias", html.ul(ref_items)))
 
     return html
 
