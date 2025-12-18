@@ -36,8 +36,8 @@ article h3 {
   text-align: center;
 }
 
-/* especificidad: 001 */
 @media (max-width: 600px) {
+  /* especificidad: 001 */
   main {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;

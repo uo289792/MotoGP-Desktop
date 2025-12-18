@@ -22,7 +22,7 @@ body {
 
 /* Especificidad: 001 */
 main {
-    margin: 1em;
+  margin: 1em;
 }
 
 /* Especificidad: 001 */
@@ -91,10 +91,12 @@ caption {
   margin-bottom: 0.5em;
 }
 
+/* Especificidad: 001 */
 video {
  width:40%;
  height:auto;
 }
+
 /* Especificidad: 001 */
 audio {
  width:40%;
@@ -114,7 +116,7 @@ footer {
   text-align: center;
 }
 
-/* Especificidad: 002 */
+/* Especificidad: 001 */
 svg {
   width: 100%; 
 }
@@ -129,6 +131,7 @@ label {
   font-weight: bold;
 }
 
+/* Especificidad: 011 */
 /* Especificidad: 011 */
 input[type="button"], input[type="submit"] {
   width: 100%;
@@ -177,7 +180,7 @@ figure video{
 
 /* Estilos optativos */
 
-/* Especificidad: 001 */
+/* Especificidad: 002 */
 main p {
   text-align: justify;
 }
@@ -190,22 +193,23 @@ table{
 }
 
 /* Especificidad: 001 */
+/* Especificidad: 001 */
 th, td {
-    padding: 0.5em 1em;
-    border: 0.1em solid #000000;
-    text-align: left;
+  padding: 0.5em 1em;
+  border: 0.1em solid #000000;
+  text-align: left;
 }
 
 /* Especificidad: 001 */
 th {
-    background-color: #05445e;
-    color: #ffffff;
+  background-color: #05445e;
+  color: #ffffff;
 }
 
 /* Especificidad: 001 */
 td {
-    background-color: #A8BBB0;
-    color: #000000;
+  background-color: #A8BBB0;
+  color: #000000;
 }
 
 /* Especificidad: 001 */

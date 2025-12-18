@@ -129,21 +129,29 @@ if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['accion'])){
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Prueba de Usabilidad - MotoGP</title>
-    <link rel="stylesheet" href="../estilo/estilo.css">
+    <meta charset="UTF-8" />
+    <meta name="author" content="David Muños Río" />
+    <meta name="description" content="Test del proyecto MotoGP-Desktop" />
+    <meta name="keywords" content="MotoGP, MotoGP-Desktop, test, preguntas" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MotoGP-Test</title>
+
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <link rel="stylesheet" href="estilo/layout.css" />
+    <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
+
 </head>
 <body>
     <main>       
     <header>
         <h1>MotoGP Desktop</h1> 
         <nav aria-label="Menú principal">
-            <a href="index.html" title="Inicio" class="active">Inicio</a>
+            <a href="index.html" title="Inicio">Inicio</a>
             <a href="piloto.html" title="Información del piloto">Piloto</a>
             <a href="circuito.html" title="Información de circuitos">Circuito</a>
             <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
             <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
-            <a href="juegos.html" title="Juegos">Juegos</a>
+            <a href="juegos.html" title="Juegos" class="active">Juegos</a>
             <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
         </nav>
     </header>
