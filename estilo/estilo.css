@@ -39,6 +39,12 @@ header a {
   text-decoration: none;
 }
 
+/* Especificidad: 011 */
+input + article * {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* Especificidad: 002*/
 header + p {
   background-color: #A8BBB0;
@@ -108,6 +114,38 @@ footer {
   text-align: center;
 }
 
+/* Especificidad: 002 */
+svg {
+  width: 100%; 
+}
+
+/* Especificidad: 001 */
+input {
+  width: 100%;
+}
+
+/* Especificidad: 001 */
+label {
+  font-weight: bold;
+}
+
+/* Especificidad: 011 */
+input[type="button"], input[type="submit"] {
+  width: 100%;
+}
+
+/* Especificidad: 002 */
+figure img{
+  width: 40%;  
+  height:auto;     
+}
+
+/* Especificidad: 002 */
+figure video{
+  width: 40%;  
+  height:auto;     
+}
+
 @media (max-width: 600px) {
   /* Especificidad: 001 */
   video {
@@ -121,6 +159,18 @@ footer {
   /* Especificidad: 001 */
   table {
     width: 100%;
+  }
+
+  /* Especificidad: 002 */
+  figure img{
+    width: 100%;  
+    height:auto;     
+  }
+
+  /* Especificidad: 002 */
+  figure video{
+    width: 100%;  
+    height:auto;     
   }
 
 }
