@@ -5,14 +5,26 @@ class Noticias {
     #noticias;
 
     constructor() {
-        this.#busqueda = "MotoGP";
+        // Búsqueda avanzada: MotoGP y términos relacionados
+        this.#busqueda = 'MotoGP+(motociclismo|"gran premio"|moto)';
         this.#url = "https://api.thenewsapi.com/v1/news/all";
-        this.#apiKey = "JewnK4wW0Q63HNgkn4MRgfP56bYpXQ64iJoIxI6C";  
+        this.#apiKey = "JewnK4wW0Q63HNgkn4MRgfP56bYpXQ64iJoIxI6C";
         this.#noticias = [];
     }
 
     buscar() {
-        const llamada = `${this.#url}?q=${encodeURIComponent(this.#busqueda)}&language=es&page_size=5&api_token=${this.#apiKey}`;
+        const params = new URLSearchParams({
+            api_token: this.#apiKey,
+            search: this.#busqueda,
+            search_fields: "title,description,keywords",
+            language: "es",
+            categories: "sports",
+            sort: "relevance",
+            limit: 5
+        });
+
+        const llamada = `${this.#url}?${params.toString()}`;
+
         return fetch(llamada)
             .then(respuesta => {
                 if (!respuesta.ok) throw new Error("Error HTTP " + respuesta.status);
@@ -37,7 +49,6 @@ class Noticias {
 
     #mostrarNoticias() {
         const section = document.createElement('section');
-
         const h3 = document.createElement('h3');
         h3.textContent = "Noticias sobre MotoGP";
         section.appendChild(h3);
@@ -80,7 +91,6 @@ class Noticias {
     }
 }
 
-// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     const noticias = new Noticias();
     noticias.init();

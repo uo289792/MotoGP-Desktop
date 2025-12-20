@@ -3,34 +3,40 @@ class Cronometro {
     private $inicio;
     private $tiempo;
 
-    public function __construct() {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        $this->tiempo = $_SESSION['cronometro_tiempo'] ?? 0;
-        $this->inicio = $_SESSION['cronometro_inicio'] ?? null;
+    public function __construct($tiempo = 0, $inicio = null) {
+        $this->tiempo = $tiempo;
+        $this->inicio = $inicio;
     }
 
     public function arrancar() {
         $this->inicio = microtime(true);
-        $_SESSION['cronometro_inicio'] = $this->inicio;
     }
 
     public function parar() {
-        if ($this->inicio) {
+        if ($this->inicio !== null) {
             $this->tiempo += microtime(true) - $this->inicio;
             $this->inicio = null;
-            unset($_SESSION['cronometro_inicio']);
-            $_SESSION['cronometro_tiempo'] = $this->tiempo;
         }
     }
 
-    public function getTiempo() {
-        if ($this->inicio) return $this->tiempo + (microtime(true) - $this->inicio);
-        return $this->tiempo;
+    public function mostrar() {
+        $total = $this->tiempo;
+        if ($this->inicio !== null) {
+            $total += microtime(true) - $this->inicio;
+        }
+        $min = floor($total / 60);
+        $seg = floor($total % 60);
+        $dec = floor(($total - floor($total)) * 10);
+        return sprintf("%02d:%02d.%d", $min, $seg, $dec);
     }
 
     public function reiniciar() {
-        $this->inicio = null;
         $this->tiempo = 0;
-        unset($_SESSION['cronometro_inicio'], $_SESSION['cronometro_tiempo']);
+        $this->inicio = null;
     }
+
+    // Getters para guardar en sesión
+    public function getTiempo() { return $this->tiempo; }
+    public function getInicio() { return $this->inicio; }
 }
+?>

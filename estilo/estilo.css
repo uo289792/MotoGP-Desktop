@@ -125,12 +125,24 @@ svg {
 /* Especificidad: 001 */
 input {
   width: 30%;
+  margin-bottom: 0.5em;
 }
 
 /* Especificidad: 001 */
 label {
+  display: block;  /* hace que cada label ocupe toda la línea */
   font-weight: bold;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+}
+
+/* Especificidad: 001 */
+textarea {
+  width: 30%;
+}
+
+/* Especificidad: 001 */
+select {
+  width: 15%;
 }
 
 /* Especificidad: 002 */
@@ -176,6 +188,16 @@ figure video{
   input {
     width: 100%;
   }
+
+  /* Especificidad: 001 */
+  textarea {
+    width: 100%;
+  }
+
+  /* Especificidad: 001 */
+  select {
+    width: 100%;
+}
 }
 
 /* Estilos optativos */

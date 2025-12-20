@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/Cronometro.php';
+require_once __DIR__ . '/cronometro.php';
 
 class Configuracion {
 
@@ -59,26 +59,38 @@ class Configuracion {
         $stmt->close();
     }
 
-    public function insertarResultados($codigo, $dispositivo, $tiempo, $valoracion, $respuestas, $observaciones) {
-        $json = json_encode($respuestas);
+    public function insertarResultados($codigo, $dispositivo, $tiempo, $valoracion, $respuestas, $comentarios_usuario, $propuestas_mejora) {
+        $json_respuestas = json_encode($respuestas);
         $completada = 1;
 
         $stmt = $this->conn->prepare(
             "INSERT INTO resultados_prueba
              (codigo_usuario, dispositivo_id, tiempo_segundos, completada,
-              comentarios_usuario, propuestas_mejora, valoracion)
-             VALUES (?,?,?,?,?,?,?)"
+              respuestas, comentarios_usuario, propuestas_mejora, valoracion)
+             VALUES (?,?,?,?,?,?,?,?)"
         );
+
         $stmt->bind_param(
-            "siidssi",
+            "siidsssi",
             $codigo,
             $dispositivo,
             $tiempo,
             $completada,
-            $observaciones,
-            $json,
+            $json_respuestas,
+            $comentarios_usuario,
+            $propuestas_mejora,
             $valoracion
         );
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function insertarObservacionesFacilitador($codigo, $observaciones) {
+        if (empty($observaciones)) return;
+        $stmt = $this->conn->prepare(
+            "INSERT INTO observaciones (codigo_usuario, comentarios) VALUES (?, ?)"
+        );
+        $stmt->bind_param("ss", $codigo, $observaciones);
         $stmt->execute();
         $stmt->close();
     }
@@ -94,7 +106,6 @@ $msg    = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($estado === 'preguntas') {
-        $cronometro->arrancar();
         $_SESSION['respuestas'] = [];
 
         for ($i = 1; $i <= 10; $i++) {
@@ -106,11 +117,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($error === '') {
+            $cronometro->parar(); // Detenemos el cronómetro tras las 10 preguntas
             $_SESSION['estado'] = 'datos';
             $estado = 'datos';
         }
+
     } elseif ($estado === 'datos') {
-        $cronometro->parar();
 
         $cfg->insertarProfesion($_POST['profesion']);
         $profId = $cfg->getIdProfesion($_POST['profesion']);
@@ -123,13 +135,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['pericia']
         );
 
+        // Guardar resultados de la prueba
         $cfg->insertarResultados(
             $_POST['codigo_usuario'],
             (int)$_POST['dispositivo_id'],
             $cronometro->getTiempo(),
             (int)$_POST['valoracion'],
             $_SESSION['respuestas'],
-            $_POST['observaciones'] ?? null
+            $_POST['comentarios_usuario'] ?? '',
+            $_POST['propuestas_mejora'] ?? ''
+        );
+
+        // Guardar observaciones del facilitador
+        $cfg->insertarObservacionesFacilitador(
+            $_POST['codigo_usuario'],
+            $_POST['observaciones_facilitador'] ?? ''
         );
 
         $_SESSION['estado'] = 'final';
@@ -156,108 +176,113 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" href="../multimedia/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <h2>Prueba de Usabilidad - MotoGP</h2>
-    </header>
+<header>
+    <h1>Test de Usabilidad - MotoGP</h1>
+</header>
 
-    <main>
+<main>
 
-    <?php if ($error !== '') echo '<p>' . htmlspecialchars($error) . '</p>'; ?>
-    <?php if ($msg !== '') echo '<p>' . htmlspecialchars($msg) . '</p>'; ?>
+<?php if ($error !== '') echo '<p>' . htmlspecialchars($error) . '</p>'; ?>
+<?php if ($msg !== '') echo '<p>' . htmlspecialchars($msg) . '</p>'; ?>
 
-    <form method="post">
+<form method="post">
 
-    <?php if ($estado === 'preguntas'): ?>
+<?php if ($estado === 'preguntas'): ?>
 
-        <section>
-        <?php
-        $preguntas = [
-            "¿Cuál es la temática de las fotos de la página principal?",
-            "¿Cuántas noticias aparecen en la página principal?",
-            "¿Cuántos enlaces hay en el menú principal?",
-            "¿En qué sección se encuentra el mapa?",
-            "¿Qué piloto aparece en la sección Piloto?",
-            "¿Cuál es su apodo?",
-            "¿Qué país está asociado al circuito?",
-            "¿Qué temperatura se muestra el día de la carrera?",
-            "¿Cuántos botones tiene la sección Juegos?",
-            "¿Cuánto tiempo tardas en completar el juego?"
-        ];
+    <section>
+    <?php
+    $preguntas = [
+        "¿Cuál es la temática de las fotos de la página principal?",
+        "¿Cuántas noticias aparecen en la página principal?",
+        "¿Cuántos enlaces hay en el menú principal?",
+        "¿En qué sección se encuentra el mapa?",
+        "¿Qué piloto aparece en la sección Piloto?",
+        "¿Cuál es su apodo?",
+        "¿Qué país está asociado al circuito?",
+        "¿Qué temperatura se muestra el día de la carrera?",
+        "¿Cuántos botones tiene la sección Juegos?",
+        "¿Cuánto tiempo tardas en completar el juego?"
+    ];
 
-        foreach ($preguntas as $i => $pregunta) {
-            echo '<label>' . ($i + 1) . '. ' . htmlspecialchars($pregunta) . '</label>';
-            echo '<input type="text" name="pregunta' . ($i + 1) . '" required>';
-            echo '<br>';
-        }
-        ?>
+    foreach ($preguntas as $i => $pregunta) {
+        $id_input = 'pregunta' . ($i + 1);
+        echo '<label for="' . $id_input . '">' . ($i + 1) . '. ' . htmlspecialchars($pregunta) . '</label>';
+        echo '<input type="text" id="' . $id_input . '" name="' . $id_input . '" required>';
+    }
+    ?>
 
-            <label>Observaciones del usuario:</label>
-            <textarea name="observaciones" rows="5" cols="50"></textarea>
-
-            <button type="submit">Continuar</button>
-        </section>
-
-    <?php elseif ($estado === 'datos'): ?>
-
-        <section>
-            <label>Código de usuario
-                <input type="text" name="codigo_usuario" required>
-            </label>
-
-            <label>Profesión
-                <input type="text" name="profesion" required>
-            </label>
-
-            <label>Edad
-                <input type="number" name="edad" min="0" max="120" required>
-            </label>
-
-            <label>Género
-                <select name="genero" required>
-                    <option value="">Seleccione</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
-                    <option value="O">Otro</option>
-                </select>
-            </label>
-
-            <label>Pericia informática
-                <select name="pericia" required>
-                    <option value="">Seleccione</option>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
-                </select>
-            </label>
-
-            <label>Dispositivo
-                <select name="dispositivo_id" required>
-                    <option value="1">Ordenador</option>
-                    <option value="2">Tableta</option>
-                    <option value="3">Teléfono</option>
-                </select>
-            </label>
-
-            <label>Valoración general (0-10)
-                <input type="number" name="valoracion" min="0" max="10" required>
-            </label>
-
+        <p>
             <button type="submit">Finalizar</button>
-        </section>
+        </p>
+    </section>
 
-    <?php else: ?>
+<?php elseif ($estado === 'datos'): ?>
 
-        <section>
-            <p>La página se cerrará automáticamente en unos segundos.</p>
-        </section>
+    <section>
+        <h2>Datos del usuario y observaciones</h2>
 
-    <?php endif; ?>
+        <label for="codigo_usuario:">Código de usuario</label>
+            <input type="text" id="codigo_usuario" name="codigo_usuario" required>
 
-    </form>
-    </main>
+        <label for="profesion">Profesión:</label>
+            <input type="text" id="profesion" name="profesion" required>
 
-    <footer>
-        <p>&copy; David Muñoz Río - 2025</p>
-    </footer>
+        <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" min="0" max="120" required>
+
+        <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="">Seleccione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otro</option>
+            </select>
+    
+        <label for="pericia">Pericia informática:</label>
+            <select id="pericia" name="pericia" required>
+                <option value="">Seleccione</option>
+                <option value="baja">Baja</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+            </select>
+
+        <label for="dispositivo_id">Dispositivo:</label>
+            <select id="dispositivo_id" name="dispositivo_id" required>
+                <option value="1">Ordenador</option>
+                <option value="2">Tableta</option>
+                <option value="3">Teléfono</option>
+            </select>
+
+        <label for="valoracion">Valoración general (0-10):</label>
+            <input type="number" id="valoracion" name="valoracion" min="0" max="10" required>
+
+        <label for="comentarios_usuario">Observaciones del usuario:</label>
+            <textarea id="comentarios_usuario" name="comentarios_usuario" rows="5" cols="50"></textarea>
+
+        <label for="propuestas_mejora">Propuestas de mejora:</label>
+            <textarea id="propuestas_mejora" name="propuestas_mejora" rows="5" cols="50"></textarea>
+
+        <label for="observaciones_facilitador">Observaciones del facilitador:</label>
+            <textarea id="observaciones_facilitador" name="observaciones_facilitador" rows="5" cols="50"></textarea>
+        
+        <p>
+            <button type="submit">Finalizar</button>
+        </p>
+    </section>
+
+<?php else: ?>
+
+    <section>
+        <p>La página se cerrará automáticamente en unos segundos.</p>
+    </section>
+
+<?php endif; ?>
+
+</form>
+</main>
+
+<footer>
+    <p>&copy; David Muñoz Río - 2025</p>
+</footer>
 </body>
 </html>

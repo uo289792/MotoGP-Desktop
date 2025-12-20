@@ -30,12 +30,14 @@ CREATE TABLE resultados_prueba (
     dispositivo_id INT NOT NULL,
     tiempo_segundos DECIMAL(10,3) NOT NULL,
     completada BOOLEAN NOT NULL,
-    comentarios_usuario TEXT,
-    propuestas_mejora TEXT,
+    respuestas JSON NOT NULL, -- aquí van las 10 respuestas
+    comentarios_usuario TEXT, -- observaciones del usuario
+    propuestas_mejora TEXT,   -- propuestas de mejora
     valoracion TINYINT UNSIGNED CHECK (valoracion BETWEEN 0 AND 10),
     FOREIGN KEY (codigo_usuario) REFERENCES usuarios(codigo_usuario),
     FOREIGN KEY (dispositivo_id) REFERENCES dispositivos(id)
 );
+
 
 -- Tabla de observaciones del facilitador
 CREATE TABLE observaciones (

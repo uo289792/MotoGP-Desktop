@@ -1,6 +1,6 @@
 <?php
 // php/configuracion_ui.php
-require_once __DIR__.'/Configuracion.php';
+require_once __DIR__.'/configuracion.php';
 $cfg = new Configuracion();
 $msg = '';
 $error = '';
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <header>
         <h1>MotoGP Desktop</h1> 
-        <nav aria-label="Menú principal">
+        <nav>
             <a href="../index.html" title="Inicio">Inicio</a>
             <a href="../piloto.html" title="Información del piloto">Piloto</a>
             <a href="../circuito.html" title="Información de circuitos">Circuito</a>
@@ -55,13 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../juegos.html" title="Juegos" class="active">Juegos</a>
             <a href="../ayuda.html" title="Ayuda del proyecto">Ayuda</a>
         </nav>
-      </header>
+    </header>
 
-    <p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> Configuración de la base de datos</p>
+    <p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> <strong>Configuración de la base de datos</strong></p>
 
     <main>
 
-      <h1>Configuración - Test de Usabilidad</h1>
+      <h1>Configuración de la base de datos</h1>
       <p>Operaciones disponibles sobre la base de datos de pruebas.</p>
 
       <?php if($msg): ?>

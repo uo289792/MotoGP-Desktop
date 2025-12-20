@@ -1,30 +1,34 @@
 <?php
 session_start();
-require_once __DIR__ . '/Cronometro.php';
+require_once __DIR__ . '/cronometro.php'; 
 
-$cronometro = new Cronometro();
+
+$tiempo = $_SESSION['cronometro_tiempo'] ?? 0;
+$inicio = $_SESSION['cronometro_inicio'] ?? null;
+$cronometro = new Cronometro($tiempo, $inicio); 
+
 $mensaje = '';
+$tiempoHtml = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $accion = $_POST['accion'] ?? '';
 
     if ($accion === 'arrancar') {
-        $cronometro->arrancar();
-        $mensaje = 'Cronómetro arrancado.';
-    }
-
-    elseif ($accion === 'parar') {
+        $cronometro->reiniciar();  
+        $cronometro->arrancar();   
+        $mensaje = 'Cronómetro arrancado desde cero.';
+    } elseif ($accion === 'parar') {
         $cronometro->parar();
         $mensaje = 'Cronómetro detenido.';
+    } elseif ($accion === 'mostrar') {
+        $tiempoHtml = '<p>Tiempo transcurrido: ' . $cronometro->mostrar() . '</p>';
     }
 
-    elseif ($accion === 'reiniciar') {
-        $cronometro->reiniciar();
-        $mensaje = 'Cronómetro reiniciado.';
-    }
+    $_SESSION['cronometro_tiempo'] = $cronometro->getTiempo();
+    $_SESSION['cronometro_inicio'] = $cronometro->getInicio();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-<header>
+    <header>
         <h1>MotoGP Desktop</h1> 
         <nav>
             <a href="../index.html" title="Inicio">Inicio</a>
@@ -53,42 +57,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../juegos.html" title="Juegos" class="active">Juegos</a>
             <a href="../ayuda.html" title="Ayuda del proyecto">Ayuda</a>
         </nav>
-</header>
+    </header>
 
-<p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> Prueba del cronómetro</p>
+    <p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> Prueba del cronómetro</p>
 
-<main>
+    <main>
+        <section>
+            <h2>Prueba del cronómetro</h2>
 
-<section>
-    <h2>Prueba del cronómetro</h2>
+            <form method="post">
+                <button type="submit" name="accion" value="arrancar">Arrancar</button>
+                <button type="submit" name="accion" value="parar">Parar</button>
+                <button type="submit" name="accion" value="mostrar">Mostrar</button>
+            </form>
 
-    <form method="post">
-        <button type="submit" name="accion" value="arrancar">Arrancar</button>
-        <button type="submit" name="accion" value="parar">Parar</button>
-        <button type="submit" name="accion" value="reiniciar">Reiniciar</button>
-    </form>
+            <?php if ($mensaje) echo '<p>' . htmlspecialchars($mensaje) . '</p>'; ?>
+            <?= $tiempoHtml ?>
+        </section>
+    </main>
 
-<?php
-if ($mensaje !== '') {
-    echo '<p>' . htmlspecialchars($mensaje) . '</p>';
-}
 
-$tiempo = $cronometro->getTiempo();
-$minutos = floor($tiempo / 60);
-$segundos = floor($tiempo % 60);
-$decimas = floor(($tiempo - floor($tiempo)) * 10);
-
-echo '<p>Tiempo actual: ';
-echo sprintf('%02d:%02d.%d', $minutos, $segundos, $decimas);
-echo '</p>';
-?>
-</section>
-
-</main>
-
-<footer>
-    <p>&copy; David Muñoz Río - 2025</p>
-</footer>
+    <footer>
+        <p>&copy; David Muñoz Río - 2025</p>
+    </footer>
 
 </body>
 </html>
