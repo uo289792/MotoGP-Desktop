@@ -37,22 +37,21 @@ class Noticias {
 
     #mostrarNoticias() {
         const section = document.createElement('section');
-        section.setAttribute("aria-label", "Noticias MotoGP");
 
-        const h2 = document.createElement('h2');
-        h2.textContent = "Noticias sobre MotoGP";
-        section.appendChild(h2);
+        const h3 = document.createElement('h3');
+        h3.textContent = "Noticias sobre MotoGP";
+        section.appendChild(h3);
 
         this.#noticias.forEach(noticia => {
             const article = document.createElement('article');
 
-            const h3 = document.createElement('h3');
+            const h4 = document.createElement('h4');
             const enlace = document.createElement('a');
             enlace.href = noticia.enlace;
             enlace.target = "_blank";
             enlace.rel = "noopener noreferrer";
             enlace.textContent = noticia.titular;
-            h3.appendChild(enlace);
+            h4.appendChild(enlace);
 
             const pEntradilla = document.createElement('p');
             pEntradilla.textContent = noticia.entradilla;
@@ -60,7 +59,7 @@ class Noticias {
             const pFuente = document.createElement('p');
             pFuente.textContent = "Fuente: " + noticia.fuente;
 
-            article.appendChild(h3);
+            article.appendChild(h4);
             article.appendChild(pEntradilla);
             article.appendChild(pFuente);
 
