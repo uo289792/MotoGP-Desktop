@@ -1,75 +1,88 @@
 class Noticias {
-  constructor() {
-      this.busqueda = "MotoGP";
-      this.url = "https://api.thenewsapi.com/v1/news/all";
-      this.apiKey = "JewnK4wW0Q63HNgkn4MRgfP56bYpXQ64iJoIxI6C";  
-      this.noticias = [];    
-  }
+    #busqueda;
+    #url;
+    #apiKey;
+    #noticias;
 
-  buscar() {
-      const llamada =
-          `${this.url}?q=${encodeURIComponent(this.busqueda)}` +
-          `&language=es&page_size=5&api_token=${this.apiKey}`;
+    constructor() {
+        this.#busqueda = "MotoGP";
+        this.#url = "https://api.thenewsapi.com/v1/news/all";
+        this.#apiKey = "JewnK4wW0Q63HNgkn4MRgfP56bYpXQ64iJoIxI6C";  
+        this.#noticias = [];
+    }
 
-      return fetch(llamada)
-          .then(respuesta => {
-              if (!respuesta.ok) {
-                  throw new Error("Error HTTP " + respuesta.status);
-              }
-              return respuesta.json();
-          });
-  }
+    buscar() {
+        const llamada = `${this.#url}?q=${encodeURIComponent(this.#busqueda)}&language=es&page_size=5&api_token=${this.#apiKey}`;
+        return fetch(llamada)
+            .then(respuesta => {
+                if (!respuesta.ok) throw new Error("Error HTTP " + respuesta.status);
+                return respuesta.json();
+            });
+    }
 
-  procesarInformacion(json) {
-      if (!json || !json.data) return;
+    #procesarInformacion(json) {
+        if (!json || !json.data) return;
 
-      json.data.forEach(item => {
-          this.noticias.push({
-              titular: item.title || "",
-              entradilla: item.description || "",
-              enlace: item.url || "#",
-              fuente: item.source || ""
-          });
-      });
+        json.data.forEach(item => {
+            this.#noticias.push({
+                titular: item.title || "",
+                entradilla: item.description || "",
+                enlace: item.url || "#",
+                fuente: item.source || ""
+            });
+        });
 
-      this.mostrarNoticias();
-  }
+        this.#mostrarNoticias();
+    }
 
-  mostrarNoticias() {
-      const section = $("<section></section>");
-      section.attr("aria-label", "Noticias MotoGP");
+    #mostrarNoticias() {
+        const section = document.createElement('section');
+        section.setAttribute("aria-label", "Noticias MotoGP");
 
-      const h2 = $("<h2>Noticias sobre MotoGP</h2>");
-      section.append(h2);
+        const h2 = document.createElement('h2');
+        h2.textContent = "Noticias sobre MotoGP";
+        section.appendChild(h2);
 
-      this.noticias.forEach(noticia => {
-          const article = $("<article></article>");
-          const h3 = $("<h3></h3>");
-          const enlace = $("<a></a>")
-              .attr("href", noticia.enlace)
-              .attr("target", "_blank")
-              .attr("rel", "noopener noreferrer")
-              .text(noticia.titular);
+        this.#noticias.forEach(noticia => {
+            const article = document.createElement('article');
 
-          const pEntradilla = $("<p></p>").text(noticia.entradilla);
-          const pFuente = $("<p></p>").text("Fuente: " + noticia.fuente);
+            const h3 = document.createElement('h3');
+            const enlace = document.createElement('a');
+            enlace.href = noticia.enlace;
+            enlace.target = "_blank";
+            enlace.rel = "noopener noreferrer";
+            enlace.textContent = noticia.titular;
+            h3.appendChild(enlace);
 
-          h3.append(enlace);
-          article.append(h3);
-          article.append(pEntradilla);
-          article.append(pFuente);
+            const pEntradilla = document.createElement('p');
+            pEntradilla.textContent = noticia.entradilla;
 
-          section.append(article);
-      });
+            const pFuente = document.createElement('p');
+            pFuente.textContent = "Fuente: " + noticia.fuente;
 
-      $("main").append(section);
-  }
+            article.appendChild(h3);
+            article.appendChild(pEntradilla);
+            article.appendChild(pFuente);
 
-  init() {
-      this.buscar()
-          .then(this.procesarInformacion.bind(this))
-          .catch(() => {
-              $("main").append("<p>Error al cargar las noticias</p>");
-          });
-  }
+            section.appendChild(article);
+        });
+
+        document.querySelector('main').appendChild(section);
+    }
+
+    init() {
+        this.buscar()
+            .then(this.#procesarInformacion.bind(this))
+            .catch(() => {
+                const p = document.createElement('p');
+                p.textContent = "Error al cargar las noticias";
+                document.querySelector('main').appendChild(p);
+            });
+    }
 }
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    const noticias = new Noticias();
+    noticias.init();
+});

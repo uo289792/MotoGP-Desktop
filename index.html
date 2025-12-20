@@ -13,8 +13,8 @@
     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/carrusel.js"></script>
-    <script src="js/noticias.js"></script>
+    <script src="js/carrusel.js" defer></script>
+    <script src="js/noticias.js" defer></script>
 
 
 </head>
@@ -38,16 +38,6 @@
             <p>Proyecto de prácticas de Software y estándares para la Web.</p>
         </section>
     </main>
-  
-    <script>
-        const carr = new Carrusel();
-        carr.getFotografias();
-    </script>
-
-    <script>
-        const noticias = new Noticias();
-        noticias.init();
-    </script>
 
     <footer>
         <p>&copy; David Muñoz Río - 2025</p>

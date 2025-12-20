@@ -192,3 +192,22 @@ class Ciudad {
         document.querySelector('main').appendChild(section);
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const scarperia = new Ciudad(
+        "Scarperia e San Piero",
+        "Italia",
+        "scarperiese"
+    );
+
+    scarperia.initPoblacionYCoordenadas(
+        12600,
+        43.9967,
+        11.3558
+    );
+
+    scarperia.writeInfo();
+
+});
+

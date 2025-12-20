@@ -1,68 +1,71 @@
-// Requiere jQuery 3.7.1
-
 class Carrusel {
+    #busqueda;
+    #actual;
+    #maximo;
+    #fotografias;
 
     constructor() {
-        this.busqueda = "MotoGP Mugello Circuit";
-        this.actual = 0;
-        this.maximo = 4; 
-        this.fotografias = [];
+        this.#busqueda = "MotoGP, Mugello";
+        this.#actual = 0;
+        this.#maximo = 4;
+        this.#fotografias = [];
     }
 
     getFotografias() {
-        const flickrAPI =
-            "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+        const flickrAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
+        // JSONP con jQuery
         $.getJSON(flickrAPI, {
-            tags: "MotoGP,Mugello",
+            tags:  this.#busqueda,
             tagmode: "all",
             format: "json"
         })
-        .done(this.procesarJSONFotografias.bind(this))
+        .done(this.#procesarJSONFotografias.bind(this))
         .fail(() => {
-            $("main").append("<p>Error al obtener las imágenes</p>");
+            const p = $("<p></p>").text("Error al obtener las imágenes");
+            $("main").append(p);
         });
     }
 
-    procesarJSONFotografias(data) {
-        for (let i = 0; i <= this.maximo; i++) {
+    #procesarJSONFotografias(data) {
+        for (let i = 0; i <= this.#maximo; i++) {
             const foto = data.items[i];
             const url = foto.media.m.replace("_m.", "_b.");
-
-            this.fotografias.push({
-                url: url,
+            this.#fotografias.push({
+                url,
                 alt: "Imagen del circuito de Mugello (MotoGP)"
             });
         }
-        this.mostrarFotografias();
+        this.#mostrarFotografias();
     }
 
-    mostrarFotografias() {
+    #mostrarFotografias() {
+        if (this.#fotografias.length === 0) return;
+
         const article = $("<article></article>");
         const h2 = $("<h2>Imágenes del circuito de Mugello</h2>");
         const img = $("<img>")
-            .attr("src", this.fotografias[this.actual].url)
-            .attr("alt", this.fotografias[this.actual].alt);
+            .attr("src", this.#fotografias[this.#actual].url)
+            .attr("alt", this.#fotografias[this.#actual].alt);
 
         article.append(h2);
         article.append(img);
-
         $("main").append(article);
 
-        // TAREA 8: Temporizador
-        setInterval(this.cambiarFotografia.bind(this), 3000);
+        setInterval(this.#cambiarFotografia.bind(this), 3000);
     }
 
-    // TAREA 8: Cambio de imagen
-    cambiarFotografia() {
-        this.actual++;
-
-        if (this.actual > this.maximo) {
-            this.actual = 0;
-        }
+    #cambiarFotografia() {
+        this.#actual++;
+        if (this.#actual > this.#maximo) this.#actual = 0;
 
         $("article img")
-            .attr("src", this.fotografias[this.actual].url)
-            .attr("alt", this.fotografias[this.actual].alt);
+            .attr("src", this.#fotografias[this.#actual].url)
+            .attr("alt", this.#fotografias[this.#actual].alt);
     }
 }
+
+$(document).ready(() => {
+    const carrusel = new Carrusel();
+    carrusel.getFotografias();
+});
