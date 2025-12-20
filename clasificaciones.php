@@ -7,33 +7,57 @@ class Clasificacion {
         $this->ruta = __DIR__ . '/xml/circuitoEsquema.xml';
     }
 
-    public function consultar(): ?SimpleXMLElement {
+    // Devuelve los datos del XML como SimpleXMLElement, si existe
+    private function cargarXML(): ?SimpleXMLElement {
         if (!file_exists($this->ruta) || !is_readable($this->ruta)) {
             return null;
         }
-
         $xml = simplexml_load_file($this->ruta);
         if (!$xml) return null;
 
         $xml->registerXPathNamespace('u', 'http://www.uniovi.es');
-
         return $xml;
     }
 
-    public function ganador($xml) {
+    // Devuelve un array con los datos del ganador
+    public function obtenerGanador(): ?array {
+        $xml = $this->cargarXML();
         if (!$xml) return null;
 
         $res = $xml->xpath('//u:vencedor');
-        return $res[0] ?? null;
+        if (!$res || !isset($res[0])) return null;
+
+        $ganador = $res[0];
+        return [
+            'nombre' => (string)$ganador->nombre,
+            'tiempo'  => (string)$ganador->tiempo
+        ];
     }
 
-    public function mundial($xml) {
+    // Devuelve un array con la clasificación del mundial
+    public function obtenerMundial(): array {
+        $xml = $this->cargarXML();
         if (!$xml) return [];
 
         $res = $xml->xpath('//u:puesto');
-        return $res ?: [];
+        $puestos = [];
+        if ($res) {
+            foreach ($res as $p) {
+                $puestos[] = [
+                    'piloto' => (string)$p->piloto,
+                    'puntos' => (string)$p['puntos']
+                ];
+            }
+        }
+        return $puestos;
     }
 }
+?>
+
+<?php
+    $c = new Clasificacion();
+    $ganador = $c->obtenerGanador();
+    $puestos  = $c->obtenerMundial();
 ?>
 
 <!DOCTYPE HTML>
@@ -48,7 +72,7 @@ class Clasificacion {
 
     <link rel="stylesheet" href="estilo/estilo.css" />
     <link rel="stylesheet" href="estilo/layout.css" />
-    <link rel="ico  n" href="multimedia/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 </head>
 <body>
      <header>
@@ -70,34 +94,31 @@ class Clasificacion {
     <main>
         <section>
             <h2>Ganador de la carrera</h2>
-            <?php
-                $c = new Clasificacion();
-                $xml = $c->consultar();
-                $ganador = $c->ganador($xml);
-                if ($ganador) {
-                    echo "<p>Ganador: {$ganador->nombre}</p>";
-                    echo "<p>Tiempo: {$ganador->tiempo} s</p>";
-                } else {
-                    echo "<p>No disponible.</p>";
-                }
-            ?>
+            <?php if ($ganador): ?>
+                <p>Ganador: <?= htmlspecialchars($ganador['nombre']) ?></p>
+                <p>Tiempo: <?= htmlspecialchars($ganador['tiempo']) ?> s</p>
+            <?php else: ?>
+                <p>No disponible.</p>
+            <?php endif; ?>
         </section>
 
         <section>
             <h2>Clasificación del mundial tras la carrera</h2>
+            <?php if (!empty($puestos)): ?>
             <ol>
-            <?php
-                $puestos = $c->mundial($xml);
-                foreach ($puestos as $p) {
-                    $nombre = (string)$p->piloto;
-                    $puntos = (string)$p['puntos']; 
-                    echo "<li>{$nombre}: {$puntos} puntos</li>";
-                }
-            ?>
+                <?php foreach ($puestos as $p): ?>
+                    <li><?= htmlspecialchars($p['piloto']) ?>: <?= htmlspecialchars($p['puntos']) ?> puntos</li>
+                <?php endforeach; ?>
             </ol>
+            <?php else: ?>
+                <p>No disponible.</p>
+            <?php endif; ?>
         </section>
-
     </main>
+
+    <footer>
+        <p>&copy; David Muñoz Río - 2025</p>
+    </footer>
     
 </body>
 </html>

@@ -1,181 +1,194 @@
 class Ciudad {
+    // Atributos privados
+    #nombre;
+    #pais;
+    #gentilicio;
+    #poblacion = null;
+    #coordenadas = { lat: null, lon: null };
+    #fechaCarrera;
+    #fechaEntrenosInicio;
+    #fechaEntrenosFin;
 
-  constructor(nombre, pais, gentilicio) {
-    this._nombre = nombre;
-    this._pais = pais;
-    this._gentilicio = gentilicio;
-    this._poblacion = null;
-    this._coordenadas = { lat: null, lon: null };
+    constructor(nombre, pais, gentilicio) {
+        this.#nombre = nombre;
+        this.#pais = pais;
+        this.#gentilicio = gentilicio;
 
-    // Fechas de carrera y entrenamientos
-    this.fechaCarrera = "2025-06-22";       // Carrera Mugello 2025
-    this.fechaEntrenosInicio = "2025-06-19"; // 3 días previos
-    this.fechaEntrenosFin = "2025-06-21";
-  }
-
-  initPoblacionYCoordenadas(poblacion, lat, lon) {
-    this._poblacion = poblacion;
-    this._coordenadas.lat = lat;
-    this._coordenadas.lon = lon;
-  }
-
-  getNombre() { return String(this._nombre); }
-  getPais() { return String(this._pais); }
-
-  getInfoSecundariaHTML() {
-    const gent = this._gentilicio ?? '';
-    const pop = this._poblacion !== null ? this._poblacion.toLocaleString() : 'Desconocida';
-    return `<ul>
-      <li>Gentilicio: ${gent}</li>
-      <li>Población: ${pop}</li>
-    </ul>`;
-  }
-
-  writeCoordenadas() {
-    if (this._coordenadas.lat === null || this._coordenadas.lon === null) {
-      document.write('<p>Coordenadas: desconocidas</p>');
-    } else {
-      document.write(`<p>Coordenadas: lat ${this._coordenadas.lat}, lon ${this._coordenadas.lon}</p>`);
-    }
-  }
-
-  getMeteorologiaCarrera() {
-    const self = this;
-    $.getJSON(
-      "https://historical-forecast-api.open-meteo.com/v1/forecast",
-      {
-        latitude: this._coordenadas.lat,
-        longitude: this._coordenadas.lon,
-        hourly: "temperature_2m,apparent_temperature,precipitation,relative_humidity_2m,windspeed_10m,winddirection_10m",
-        daily: "sunrise,sunset",
-        start_date: this.fechaCarrera,
-        end_date: this.fechaCarrera,
-        timezone: "auto"
-      },
-      function (json) {
-        const datos = self.procesarJSONCarrera(json);
-        self.mostrarMeteorologiaCarrera(datos);
-      }
-    );
-  }
-
-  procesarJSONCarrera(json) {
-    const formatHora = s => s.split("T")[1].substring(0,5);
-
-    return {
-      horas: json.hourly.time,
-      temperatura: json.hourly.temperature_2m,
-      sensacion: json.hourly.apparent_temperature,
-      lluvia: json.hourly.precipitation,
-      humedad: json.hourly.relative_humidity_2m,
-      viento: json.hourly.windspeed_10m,
-      direccion: json.hourly.winddirection_10m,
-      amanecer: formatHora(json.daily.sunrise[0]),
-      atardecer: formatHora(json.daily.sunset[0])
-    };
-  }
-
-  mostrarMeteorologiaCarrera(datos) {
-    const section = $("<section></section>");
-    section.append("<h3>Meteorología Carrera</h3>");
-    const parrafo = $("<p></p>").text(
-      `El día de la carrera, ${this.fechaCarrera}, el sol saldrá a las ${datos.amanecer} y se pondrá a las ${datos.atardecer}.`
-    );
-
-    section.append(parrafo);
-
-
-    section.append("<h4>Condiciones a las 14:00 (inicio de carrera)</h4>");
-
-    const idx14 = datos.horas.findIndex(h => h.endsWith("14:00"));
-
-    if (idx14 !== -1) {
-      const lista = $("<ul></ul>");
-      lista.append("<li>Temperatura (2 m): " + datos.temperatura[idx14] + " °C</li>");
-      lista.append("<li>Sensación térmica: " + datos.sensacion[idx14] + " °C</li>");
-      lista.append("<li>Lluvia: " + datos.lluvia[idx14] + " mm</li>");
-      lista.append("<li>Humedad relativa (2 m): " + datos.humedad[idx14] + " %</li>");
-      lista.append("<li>Velocidad del viento (10 m): " + datos.viento[idx14] + " km/h</li>");
-      lista.append("<li>Dirección del viento (10 m): " + datos.direccion[idx14] + " °</li>");
-      section.append(lista);
-    } else {
-      section.append("<p>Datos horarios de la carrera no disponibles.</p>");
+        // Fechas de carrera y entrenamientos
+        this.#fechaCarrera = "2025-06-22";
+        this.#fechaEntrenosInicio = "2025-06-19";
+        this.#fechaEntrenosFin = "2025-06-21";
     }
 
-    $("main").append(section);
-  }
-
-  getMeteorologiaEntrenos() {
-    const self = this;
-    $.getJSON(
-      "https://historical-forecast-api.open-meteo.com/v1/forecast",
-      {
-        latitude: this._coordenadas.lat,
-        longitude: this._coordenadas.lon,
-        hourly: "temperature_2m,precipitation,relative_humidity_2m,windspeed_10m",
-        start_date: this.fechaEntrenosInicio,
-        end_date: this.fechaEntrenosFin,
-        timezone: "auto"
-      },
-      function (json) {
-        const datos = self.procesarJSONEntrenos(json);
-        self.mostrarMeteorologiaEntrenos(datos);
-      }
-    );
-  }
-
-  procesarJSONEntrenos(json) {
-    const dias = {};
-    json.hourly.time.forEach((t, i) => {
-      const dia = t.split("T")[0];
-      if (!dias[dia]) dias[dia] = { temp: [], lluvia: [], humedad: [], viento: [] };
-
-      dias[dia].temp.push(json.hourly.temperature_2m[i]);
-      dias[dia].lluvia.push(json.hourly.precipitation[i]);
-      dias[dia].humedad.push(json.hourly.relative_humidity_2m[i]);
-      dias[dia].viento.push(json.hourly.windspeed_10m[i]);
-    });
-
-    const resultado = [];
-    for (let d in dias) {
-      resultado.push({
-        dia: d,
-        temperatura: (dias[d].temp.reduce((a,b)=>a+b,0)/dias[d].temp.length).toFixed(2),
-        lluvia: (dias[d].lluvia.reduce((a,b)=>a+b,0)/dias[d].lluvia.length).toFixed(2),
-        humedad: (dias[d].humedad.reduce((a,b)=>a+b,0)/dias[d].humedad.length).toFixed(2),
-        viento: (dias[d].viento.reduce((a,b)=>a+b,0)/dias[d].viento.length).toFixed(2)
-      });
+    // Inicialización de población y coordenadas
+    initPoblacionYCoordenadas(poblacion, lat, lon) {
+        this.#poblacion = poblacion;
+        this.#coordenadas.lat = lat;
+        this.#coordenadas.lon = lon;
     }
-    return resultado;
-  }
 
-  mostrarMeteorologiaEntrenos(datos) {
-    const section = $("<section></section>");
-    section.append("<h3>Meteorología Entrenamientos</h3>");
+    // Getters públicos
+    getNombre() { return this.#nombre; }
+    getPais() { return this.#pais; }
 
-    datos.forEach(d => {
-      section.append("<h4>Día " + d.dia + "</h4>");
-      const lista = $("<ul></ul>");
-      lista.append("<li>Temperatura media: " + d.temperatura + " °C</li>");
-      lista.append("<li>Lluvia media: " + d.lluvia + " mm</li>");
-      lista.append("<li>Humedad relativa media: " + d.humedad + " %</li>");
-      lista.append("<li>Velocidad media del viento: " + d.viento + " km/h</li>");
-      section.append(lista);
-    });
+    // Genera HTML con información secundaria
+    getInfoSecundariaHTML() {
+        const pop = this.#poblacion !== null ? this.#poblacion.toLocaleString() : 'Desconocida';
+        return `<ul>
+            <li>Gentilicio: ${this.#gentilicio}</li>
+            <li>Población: ${pop}</li>
+        </ul>`;
+    }
 
-    $("main").append(section);
-  }
+    // Mostrar coordenadas en el DOM
+    writeCoordenadas() {
+        const p = document.createElement('p');
+        if (this.#coordenadas.lat === null || this.#coordenadas.lon === null) {
+            p.textContent = 'Coordenadas: desconocidas';
+        } else {
+            p.textContent = `Coordenadas: lat ${this.#coordenadas.lat}, lon ${this.#coordenadas.lon}`;
+        }
+        document.querySelector('main').appendChild(p);
+    }
 
-  writeInfo() {
-    const section = document.createElement("section");
-    section.innerHTML = `
-      <h2>${this.getNombre()}</h2>
-      <p>País: ${this.getPais()}</p>
-      ${this.getInfoSecundariaHTML()}
-    `;
-    document.querySelector("main").appendChild(section);
-    this.writeCoordenadas();
-    this.getMeteorologiaCarrera();
-    this.getMeteorologiaEntrenos(); 
-  }
+    // Mostrar información completa de la ciudad
+    writeInfo() {
+        const section = document.createElement('section');
+        section.innerHTML = `
+            <h2>${this.getNombre()}</h2>
+            <p>País: ${this.getPais()}</p>
+            ${this.getInfoSecundariaHTML()}
+        `;
+        document.querySelector('main').appendChild(section);
+        this.writeCoordenadas();
+        this.getMeteorologiaCarrera();
+        this.getMeteorologiaEntrenos();
+    }
+
+    // METEOROLOGÍA CARRERA
+    async getMeteorologiaCarrera() {
+        if (this.#coordenadas.lat === null || this.#coordenadas.lon === null) return;
+
+        const url = `https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=${this.#coordenadas.lat}&longitude=${this.#coordenadas.lon}&hourly=temperature_2m,apparent_temperature,precipitation,relative_humidity_2m,windspeed_10m,winddirection_10m&daily=sunrise,sunset&start_date=${this.#fechaCarrera}&end_date=${this.#fechaCarrera}&timezone=auto`;
+
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            const datos = this.#procesarJSONCarrera(json);
+            this.#mostrarMeteorologiaCarrera(datos);
+        } catch (error) {
+            console.error("Error al obtener meteorología de carrera:", error);
+        }
+    }
+
+    #procesarJSONCarrera(json) {
+        const formatHora = s => s.split("T")[1].substring(0,5);
+        return {
+            horas: json.hourly.time,
+            temperatura: json.hourly.temperature_2m,
+            sensacion: json.hourly.apparent_temperature,
+            lluvia: json.hourly.precipitation,
+            humedad: json.hourly.relative_humidity_2m,
+            viento: json.hourly.windspeed_10m,
+            direccion: json.hourly.winddirection_10m,
+            amanecer: formatHora(json.daily.sunrise[0]),
+            atardecer: formatHora(json.daily.sunset[0])
+        };
+    }
+
+    #mostrarMeteorologiaCarrera(datos) {
+        const section = document.createElement('section');
+        const h3 = document.createElement('h3');
+        h3.textContent = "Meteorología Carrera";
+        section.appendChild(h3);
+
+        const p = document.createElement('p');
+        p.textContent = `El día de la carrera, ${this.#fechaCarrera}, el sol saldrá a las ${datos.amanecer} y se pondrá a las ${datos.atardecer}.`;
+        section.appendChild(p);
+
+        const idx14 = datos.horas.findIndex(h => h.endsWith("14:00"));
+        if (idx14 !== -1) {
+            const ul = document.createElement('ul');
+            ul.innerHTML = `
+                <li>Temperatura (2 m): ${datos.temperatura[idx14]} °C</li>
+                <li>Sensación térmica: ${datos.sensacion[idx14]} °C</li>
+                <li>Lluvia: ${datos.lluvia[idx14]} mm</li>
+                <li>Humedad relativa (2 m): ${datos.humedad[idx14]} %</li>
+                <li>Velocidad del viento (10 m): ${datos.viento[idx14]} km/h</li>
+                <li>Dirección del viento (10 m): ${datos.direccion[idx14]} °</li>
+            `;
+            section.appendChild(ul);
+        } else {
+            const p2 = document.createElement('p');
+            p2.textContent = 'Datos horarios de la carrera no disponibles.';
+            section.appendChild(p2);
+        }
+
+        document.querySelector('main').appendChild(section);
+    }
+
+    // METEOROLOGÍA ENTRENOS
+    async getMeteorologiaEntrenos() {
+        if (this.#coordenadas.lat === null || this.#coordenadas.lon === null) return;
+
+        const url = `https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=${this.#coordenadas.lat}&longitude=${this.#coordenadas.lon}&hourly=temperature_2m,precipitation,relative_humidity_2m,windspeed_10m&start_date=${this.#fechaEntrenosInicio}&end_date=${this.#fechaEntrenosFin}&timezone=auto`;
+
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            const datos = this.#procesarJSONEntrenos(json);
+            this.#mostrarMeteorologiaEntrenos(datos);
+        } catch (error) {
+            console.error("Error al obtener meteorología de entrenos:", error);
+        }
+    }
+
+    #procesarJSONEntrenos(json) {
+        const dias = {};
+        json.hourly.time.forEach((t, i) => {
+            const dia = t.split("T")[0];
+            if (!dias[dia]) dias[dia] = { temp: [], lluvia: [], humedad: [], viento: [] };
+
+            dias[dia].temp.push(json.hourly.temperature_2m[i]);
+            dias[dia].lluvia.push(json.hourly.precipitation[i]);
+            dias[dia].humedad.push(json.hourly.relative_humidity_2m[i]);
+            dias[dia].viento.push(json.hourly.windspeed_10m[i]);
+        });
+
+        const resultado = [];
+        for (let d in dias) {
+            resultado.push({
+                dia: d,
+                temperatura: (dias[d].temp.reduce((a,b)=>a+b,0)/dias[d].temp.length).toFixed(2),
+                lluvia: (dias[d].lluvia.reduce((a,b)=>a+b,0)/dias[d].lluvia.length).toFixed(2),
+                humedad: (dias[d].humedad.reduce((a,b)=>a+b,0)/dias[d].humedad.length).toFixed(2),
+                viento: (dias[d].viento.reduce((a,b)=>a+b,0)/dias[d].viento.length).toFixed(2)
+            });
+        }
+        return resultado;
+    }
+
+    #mostrarMeteorologiaEntrenos(datos) {
+        const section = document.createElement('section');
+        const h3 = document.createElement('h3');
+        h3.textContent = "Meteorología Entrenamientos";
+        section.appendChild(h3);
+
+        datos.forEach(d => {
+            const h4 = document.createElement('h4');
+            h4.textContent = `Día ${d.dia}`;
+            section.appendChild(h4);
+
+            const ul = document.createElement('ul');
+            ul.innerHTML = `
+                <li>Temperatura media: ${d.temperatura} °C</li>
+                <li>Lluvia media: ${d.lluvia} mm</li>
+                <li>Humedad relativa media: ${d.humedad} %</li>
+                <li>Velocidad media del viento: ${d.viento} km/h</li>
+            `;
+            section.appendChild(ul);
+        });
+
+        document.querySelector('main').appendChild(section);
+    }
 }

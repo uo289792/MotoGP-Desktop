@@ -30,27 +30,27 @@ class Configuracion {
 
     // Reinicia los datos de las tablas, si existen
     public function reiniciarDatos() {
-        if (!$this->conn) return "La base de datos '{$this->db}' no existe.";
-        
-        $tables = ['resultados_prueba','observaciones','usuarios'];
-        
-        // Desactivar FK temporalmente
-        $this->conn->query("SET FOREIGN_KEY_CHECKS=0");
-        
-        foreach ($tables as $t) {
-            // Verificar si la tabla existe
-            $res = $this->conn->query("SHOW TABLES LIKE '$t'");
-            if ($res && $res->num_rows > 0) {
-                $sql = "TRUNCATE TABLE `$t`";
-                if (!$this->conn->query($sql)) {
-                    throw new Exception("Error truncando $t: " . $this->conn->error);
-                }
+    if (!$this->conn) return "La base de datos '{$this->db}' no existe.";
+
+    // Orden correcto: primero las tablas hijas, luego las tablas padres
+    $tables = ['resultados_prueba','observaciones','usuarios'];
+
+    $this->conn->query("SET FOREIGN_KEY_CHECKS=0");
+
+    foreach ($tables as $t) {
+        $res = $this->conn->query("SHOW TABLES LIKE '$t'");
+        if ($res && $res->num_rows > 0) {
+            $sql = "TRUNCATE TABLE `$t`";
+            if (!$this->conn->query($sql)) {
+                throw new Exception("Error truncando $t: " . $this->conn->error);
             }
         }
-        
-        $this->conn->query("SET FOREIGN_KEY_CHECKS=1");
-        return "Datos reiniciados correctamente.";
     }
+
+    $this->conn->query("SET FOREIGN_KEY_CHECKS=1");
+    return "Datos reiniciados correctamente.";
+}
+
 
     // Elimina la base de datos si existe
     public function eliminarBaseDatos() {

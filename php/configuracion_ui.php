@@ -39,24 +39,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <link rel="stylesheet" href="../estilo/estilo.css" />
     <link rel="stylesheet" href="../estilo/layout.css" />
+    <link rel="icon" href="../multimedia/favicon.ico" type="image/x-icon">
 
   </head>
   <body>
-    <main>       
+
     <header>
         <h1>MotoGP Desktop</h1> 
         <nav aria-label="Menú principal">
-            <a href="index.html" title="Inicio">Inicio</a>
-            <a href="piloto.html" title="Información del piloto">Piloto</a>
-            <a href="circuito.html" title="Información de circuitos">Circuito</a>
-            <a href="meteorologia.html" title="Información meteorológica">Meteorología</a>
-            <a href="clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
-            <a href="juegos.html" title="Juegos" class="active">Juegos</a>
-            <a href="ayuda.html" title="Ayuda del proyecto">Ayuda</a>
+            <a href="../index.html" title="Inicio">Inicio</a>
+            <a href="../piloto.html" title="Información del piloto">Piloto</a>
+            <a href="../circuito.html" title="Información de circuitos">Circuito</a>
+            <a href="../meteorologia.html" title="Información meteorológica">Meteorología</a>
+            <a href="../clasificaciones.php" title="Clasificaciones">Clasificaciones</a>
+            <a href="../juegos.html" title="Juegos" class="active">Juegos</a>
+            <a href="../ayuda.html" title="Ayuda del proyecto">Ayuda</a>
         </nav>
       </header>
 
-      <p>Estás en: <a href="index.html">Inicio</a> >> <a href="juegos.html">Juegos</a> >> Configuración de la base de datos</p>
+    <p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> Configuración de la base de datos</p>
+
+    <main>
 
       <h1>Configuración - Test de Usabilidad</h1>
       <p>Operaciones disponibles sobre la base de datos de pruebas.</p>
@@ -83,5 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
       </form>
     </main>
+
+    <footer>
+        <p>&copy; David Muñoz Río - 2025</p>
+    </footer>
+    
   </body>
 </html>

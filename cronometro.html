@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="estilo/layout.css" />
     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 
-    <script src="js/cronometro.js"></script>
+    <script src="js/cronometro.js" defer></script>
+
 </head>
 <body>
     
@@ -34,18 +35,15 @@
     <main>
         <h2>Cronómetro</h2>
 
-        <p>00:00.0</p>
-
-        <p>
-        <button type="button" onclick="window.cronometro.arrancar()">Arrancar</button>
-        <button type="button" onclick="window.cronometro.parar()">Parar</button>
-        <button type="button" onclick="window.cronometro.reiniciar()">Reiniciar</button>
-        </p>
+        <section>
+            <p>00:00.0</p>
+            <p>
+                <button type="button">Arrancar</button>
+                <button type="button">Parar</button>
+                <button type="button">Reiniciar</button>
+            </p>
+        </section>
     </main>
-   
-    <script>
-        window.cronometro = new Cronometro();
-    </script>
 
     <footer>
         <p>&copy; David Muñoz Río - 2025</p>

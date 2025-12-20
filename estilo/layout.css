@@ -21,8 +21,8 @@ body div {
 @media (max-width: 600px) {
     /* Especificidad: 001 */
     header {
-        flex-direction: column;   /* redefinición de la propiedad flex-direction */
-        justify-content: center;  /* redefinición de la propiedad justify-content */         
+        flex-direction: column; /* Redefinición de flex-direction */
+        justify-content: center;  /* Redefinición de justify-content */
     }
     
      /* Especificidad: 002 */
@@ -46,8 +46,8 @@ body div {
 
     /* Especificidad: 002 */
     body div {
-        width: 100%;
-        height: 40vh;
-        margin-top: 1em;
+        width: 100%;   /* Redefinición de width */
+        height: 40vh;  /* Redefinición de height */
+        margin-top: 1em; /* Redefinición de margin-top */
     }
 }

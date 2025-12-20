@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="estilo/layout.css" />
     <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/circuito.js"></script>
+    <script src="js/circuito.js" defer></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzv2G5MPTtkkCESAux5qzsPxAV8EaEH2w&callback=initMap"></script>
 </head>
 <body>
@@ -30,22 +29,27 @@
         </nav>
     </header>
 
+     <p>Estás en: <a href="index.html">Inicio</a> >> <strong>Circuito</strong></p>
+
     <main>
         <section>
             <h2>Información del circuito</h2>
-            <input type="file" accept=".html,text/html">
+            <label for="input-html">Seleccione un archivo HTML del circuito:</label>
+                <input type="file" id="input-html" accept=".html,text/html">
             <article></article>
         </section>
 
         <section>
             <h2>Altimetría del circuito</h2>
-            <input type="file" accept=".svg,image/svg+xml">
+            <label for="input-svg">Seleccione un archivo SVG del circuito:</label>
+                <input type="file" id="input-svg" accept=".svg,image/svg+xml">
             <figure></figure>
         </section>
 
         <section>
             <h2>Mapa dinámico del circuito</h2>
-            <input type="file" accept=".kml,application/vnd.google-earth.kml+xml">
+            <label for="input-kml">Seleccione un archivo KML del circuito:</label>
+                <input type="file" id="input-kml" accept=".kml,application/vnd.google-earth.kml+xml">
             <div></div>
         </section>
     </main>

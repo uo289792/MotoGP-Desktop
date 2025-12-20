@@ -124,18 +124,13 @@ svg {
 
 /* Especificidad: 001 */
 input {
-  width: 100%;
+  width: 30%;
 }
 
 /* Especificidad: 001 */
 label {
   font-weight: bold;
-}
-
-/* Especificidad: 011 */
-/* Especificidad: 011 */
-input[type="button"], input[type="submit"] {
-  width: 100%;
+  margin-bottom: 1em;
 }
 
 /* Especificidad: 002 */
@@ -177,6 +172,10 @@ figure video{
     height:auto;     
   }
 
+  /* Especificidad: 001 */
+  input {
+    width: 100%;
+  }
 }
 
 /* Estilos optativos */
