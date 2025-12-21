@@ -229,6 +229,11 @@ h3 > img {
   h3 > img {
     width: 12%;
   }
+
+  /* Especificidad: 001 */
+  input {
+    width: 100%;
+  }
 }
 
 /* Estilos optativos */
