@@ -11,6 +11,15 @@ header {
     justify-content: space-between;  
 }
 
+/* Especificidad: 001 */
+nav {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;     
+    align-items: center; 
+}
+
+
 /* Especificidad: 002 */
 body div {
     width: 50%;
@@ -32,9 +41,7 @@ body div {
 
     /* Especificidad: 001 */
     nav {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
+        flex-direction: column; /* Redefinición de flex-direction */
         gap: 1em;
     }
 
