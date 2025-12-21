@@ -149,7 +149,7 @@ select {
 /* Especificidad: 002 */
 figure img{
   width: 40%;  
-  height:auto;     
+  height:auto;  
 }
 
 /* Especificidad: 011 */
