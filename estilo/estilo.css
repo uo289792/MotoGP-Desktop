@@ -119,7 +119,8 @@ footer {
 
 /* Especificidad: 001 */
 svg {
-  width: 100%; 
+  width: 100%;
+  height: auto;
 }
 
 /* Especificidad: 001 */
@@ -149,6 +150,11 @@ select {
 figure img{
   width: 40%;  
   height:auto;     
+}
+
+/* Especificidad: 011 */
+input[type="file"] {
+  width: 100%;
 }
 
 /* Especificidad: 002 */
@@ -185,11 +191,6 @@ figure video{
   }
 
   /* Especificidad: 001 */
-  input {
-    width: 100%;
-  }
-
-  /* Especificidad: 001 */
   textarea {
     width: 100%;
   }
@@ -197,7 +198,7 @@ figure video{
   /* Especificidad: 001 */
   select {
     width: 100%;
-}
+  }
 }
 
 /* Estilos optativos */

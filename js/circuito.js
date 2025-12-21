@@ -56,25 +56,46 @@ class Circuito {
     }
 
     #cargarSVG(event) {
-        const file = event.target.files[0];
-        if (!file) return;
+        const archivo = event.target.files[0];
+        if (!archivo) return;
 
-        const reader = new FileReader();
-        reader.onload = () => {
-            this.#figuraSVG.innerHTML = '';
+        /* Limpiar contenido previo */
+        this.#figuraSVG.querySelectorAll('svg, p').forEach(e => e.remove());
+
+        /* Comprobación de tipo */
+        if (!archivo.type.match(/svg.*/)) {
+            const p = document.createElement('p');
+            p.textContent = 'Error: El archivo seleccionado no es un SVG válido.';
+            this.#figuraSVG.appendChild(p);
+            return;
+        }
+
+        const lector = new FileReader();
+
+        lector.onload = () => {
+            /* Eliminar cabecera XML si existe */
+            const contenido = lector.result.replace(/<\?xml.*?\?>/, '');
+
             const parser = new DOMParser();
-            const svgDoc = parser.parseFromString(reader.result, 'image/svg+xml');
+            const svgDoc = parser.parseFromString(contenido, 'image/svg+xml');
             const svg = svgDoc.querySelector('svg');
 
-            if (svg) {
-                this.#figuraSVG.appendChild(svg);
-                const caption = document.createElement('figcaption');
-                caption.textContent = 'Gráfico de altimetría cargado desde archivo SVG';
-                this.#figuraSVG.appendChild(caption);
-            }
+            if (!svg) return;
+
+            svg.setAttribute('viewBox', '0 0 1000 500');
+            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+            this.#figuraSVG.appendChild(svg);
+
+            const caption = document.createElement('figcaption');
+            caption.textContent = 'Gráfico de altimetría cargado desde archivo SVG';
+            this.#figuraSVG.appendChild(caption);
         };
-        reader.readAsText(file);
+
+        lector.readAsText(archivo);
     }
+
+
 
     /* ================= MAPA ================= */
 

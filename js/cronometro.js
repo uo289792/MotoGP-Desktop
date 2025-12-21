@@ -18,7 +18,7 @@ class Cronometro {
         this.#btnParar = null;
         this.#btnReiniciar = null;
 
-        const seccion = document.querySelector('main section');
+        const seccion = document.querySelector('main');
 
         if (seccion) {
             this.#display = seccion.querySelector('p');
