@@ -212,6 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if ($estado === 'preguntas'): ?>
 
     <section>
+        <h2>Cuestionario de preguntas</h2>
     <?php
     $preguntas = [
         "¿Cuál es la temática de las fotos de la página principal?",
@@ -270,6 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label for="dispositivo_id">Dispositivo:</label>
             <select id="dispositivo_id" name="dispositivo_id" required>
+                <option value="">Seleccione</option>
                 <option value="1">Ordenador</option>
                 <option value="2">Tableta</option>
                 <option value="3">Teléfono</option>
