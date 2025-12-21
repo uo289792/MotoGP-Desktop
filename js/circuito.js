@@ -11,8 +11,6 @@ class Circuito {
     constructor() {
         const seccionHTML = document.querySelector('main > section:nth-of-type(1)');
         this.#inputHTML = seccionHTML.querySelector('input[accept*="html"]');
-        this.#destinoHTML = document.createElement('article');
-        this.#inputHTML.insertAdjacentElement('afterend', this.#destinoHTML);
 
         const seccionSVG = document.querySelector('main > section:nth-of-type(2)');
         this.#inputSVG = seccionSVG.querySelector('input[accept*="svg"]');
@@ -44,12 +42,18 @@ class Circuito {
             const parser = new DOMParser();
             const doc = parser.parseFromString(reader.result, 'text/html');
 
-            this.#destinoHTML.innerHTML = '';
-
             const main = doc.querySelector('main');
             if (!main) return;
 
-            /* Corregir rutas: eliminar ../ */
+            /* Eliminar contenido anterior cargado */
+            let nodo = this.#inputHTML.nextElementSibling;
+            while (nodo && nodo.tagName === 'SECTION') {
+                const siguiente = nodo.nextElementSibling;
+                nodo.remove();
+                nodo = siguiente;
+            }
+
+            /* Corregir rutas */
             main.querySelectorAll('[src]').forEach(el => {
                 el.setAttribute(
                     'src',
@@ -64,8 +68,15 @@ class Circuito {
                 );
             });
 
-            /* Insertar solo el contenido del main */
-            this.#destinoHTML.appendChild(main.cloneNode(true));
+            /* Insertar SOLO las secciones */
+            const secciones = main.querySelectorAll(':scope > section');
+
+            secciones.forEach(section => {
+                this.#inputHTML.insertAdjacentElement(
+                    'afterend',
+                    section.cloneNode(true)
+                );
+            });
         };
 
         reader.readAsText(file);
@@ -162,13 +173,6 @@ class Circuito {
             if (coordenadas.length > 1) {
                 coordenadas.push(coordenadas[0]);
             }
-
-            const origen = coordenadas[0];
-            new google.maps.Marker({
-                position: origen,
-                map: this.#mapa,
-                title: 'Origen del circuito'
-            });
 
             new google.maps.Polyline({
                 path: coordenadas,
