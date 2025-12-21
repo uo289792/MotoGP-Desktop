@@ -2,7 +2,6 @@ class Circuito {
 
     #mapa;
     #inputHTML;
-    #destinoHTML;
     #inputSVG;
     #figuraSVG;
     #inputKML;
@@ -70,12 +69,12 @@ class Circuito {
 
             /* Insertar SOLO las secciones */
             const secciones = main.querySelectorAll(':scope > section');
+            let ref = this.#inputHTML; 
 
             secciones.forEach(section => {
-                this.#inputHTML.insertAdjacentElement(
-                    'afterend',
-                    section.cloneNode(true)
-                );
+                const clon = section.cloneNode(true);
+                ref.insertAdjacentElement('afterend', clon);
+                ref = clon; 
             });
         };
 

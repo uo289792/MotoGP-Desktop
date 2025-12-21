@@ -115,29 +115,34 @@ def build_info_sections(root):
             label = LABELS.get(lname, lname.capitalize())
             general_items.append(f"{label}: {format_with_unit(child)}")
 
-    html.add(html.section("Datos generales del circuito", html.ul(general_items)))
+    # --- Fotos y Videos dentro de la primera sección ---
+    figuras = []
 
-    # --- Multimedia: Fotos ---
+    # Fotos
     fotos = root.findall(".//u:fotos/u:foto", NS)
     for f in fotos:
         src = "../" + f.attrib.get("src", "")
         desc = f.attrib.get("descripcion", "")
-        html.add(f"""    <figure>
-      <img src="{src}" alt="{desc}" />
-      <figcaption>{desc}</figcaption>
-    </figure>
+        figuras.append(f"""      <figure>
+        <img src="{src}" alt="{desc}" />
+        <figcaption>{desc}</figcaption>
+      </figure>
 """)
 
-    # --- Multimedia: Vídeos ---
+    # Videos
     videos = root.findall(".//u:videos/u:video", NS)
     for v in videos:
         src = "../" + v.attrib.get("src", "")
         desc = v.attrib.get("descripcion", "")
-        html.add(f"""    <figure>
-      <video src="{src}" controls></video>
-      <figcaption>{desc}</figcaption>
-    </figure>
+        figuras.append(f"""      <figure>
+        <video src="{src}" controls></video>
+        <figcaption>{desc}</figcaption>
+      </figure>
 """)
+
+    # Combinar UL de datos generales + figuras
+    contenido_seccion = html.ul(general_items) + "".join(figuras)
+    html.add(html.section("Datos generales del circuito", contenido_seccion))
 
     # --- Resultados ---
     vencedor = root.find(".//u:vencedor", NS)
