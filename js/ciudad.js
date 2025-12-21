@@ -102,6 +102,11 @@ class Ciudad {
         h3.textContent = "Meteorología Carrera";
         section.appendChild(h3);
 
+        const img = document.createElement('img');
+        img.src = "multimedia/carrera.png";
+        img.alt = "Icono carrera";
+        h3.appendChild(img);
+
         const p = document.createElement('p');
         p.textContent = `El día de la carrera, ${this.#fechaCarrera}, el sol saldrá a las ${datos.amanecer} y se pondrá a las ${datos.atardecer}.`;
         section.appendChild(p);
@@ -173,6 +178,11 @@ class Ciudad {
         const h3 = document.createElement('h3');
         h3.textContent = "Meteorología Entrenamientos";
         section.appendChild(h3);
+
+        const img = document.createElement('img');
+        img.src = "multimedia/entrenos.png";
+        img.alt = "Icono entrenos";
+        h3.appendChild(img);
 
         datos.forEach(d => {
             const h4 = document.createElement('h4');

@@ -21,7 +21,7 @@ class Cronometro {
         const seccion = document.querySelector('main');
 
         if (seccion) {
-            this.#display = seccion.querySelector('p');
+            this.#display = seccion.querySelector('main > p');
             const botones = seccion.querySelectorAll('button');
             [this.#btnArrancar, this.#btnParar, this.#btnReiniciar] = botones;
 

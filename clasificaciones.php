@@ -76,7 +76,7 @@ class Clasificacion {
 </head>
 <body>
      <header>
-        <h1>MotoGP Desktop</h1> 
+        <h1><a href="index.html">MotoGP Desktop</a></h1> 
         <nav>
             <a href="index.html" title="Inicio">Inicio</a>
             <a href="piloto.html" title="Información del piloto">Piloto</a>

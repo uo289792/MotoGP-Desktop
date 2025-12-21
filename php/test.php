@@ -200,8 +200,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "¿Cuál es su apodo?",
         "¿Qué país está asociado al circuito?",
         "¿Qué temperatura se muestra el día de la carrera?",
-        "¿Cuántos botones tiene la sección Juegos?",
-        "¿Cuánto tiempo tardas en completar el juego?"
+        "¿Cuántos botones tiene la sección cronómetro?",
+        "¿Cuánto tiempo tardas en completar el juego de cartas?"
     ];
 
     foreach ($preguntas as $i => $pregunta) {

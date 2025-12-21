@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
     <header>
-        <h1>MotoGP Desktop</h1> 
-        <nav>
+        <h1><a href="index.html">MotoGP Desktop</a></h1>         
+            <nav>
             <a href="../index.html" title="Inicio">Inicio</a>
             <a href="../piloto.html" title="Información del piloto">Piloto</a>
             <a href="../circuito.html" title="Información de circuitos">Circuito</a>

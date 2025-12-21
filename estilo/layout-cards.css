@@ -19,7 +19,20 @@ main h2 {
 }
 
 /* especificidad: 002 */
-main p {
+main section {
+  grid-column: 1 / -1;
+  margin: 0 0 1rem 0;
+  text-align: center; 
+}
+
+/* especificidad: 003 */
+main section p {
+  grid-column: 1 / -1;   
+  text-align: center;     
+}
+
+/* especificidad: 002 */
+main > p {
   grid-column: 1 / -1;   
   text-align: center;     
   font-size: 2rem;        

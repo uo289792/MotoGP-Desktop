@@ -6,7 +6,6 @@
    Colores elegidos:
    Navy Blue: #05445e
    Baby Blue: #d4f1f4
-   Blue Grotto: #189ab4
    White: #ffffff
    Black: #000000
    Celadón Claro: #A8BBB0
@@ -157,6 +156,13 @@ input[type="file"] {
   width: 100%;
 }
 
+/* Especificidad: 011 */
+button {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+
 /* Especificidad: 002 */
 figure video{
   width: 40%;  
@@ -165,8 +171,16 @@ figure video{
 
 /* Especificidad: 003 */
 article h3 + img {
-  width: 50%;
+  width: 60%;
   height: auto;
+}
+
+/* Especificidad: 003 */
+h3 > img {
+  width: 5%;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 0.5em;
 }
 
 @media (max-width: 600px) {
@@ -211,6 +225,11 @@ article h3 + img {
     width: 100%;
     height: auto;
   }
+
+  /* Especificidad: 003 */
+  h3 > img {
+    width: 12%;
+  }
 }
 
 /* Estilos optativos */
@@ -243,7 +262,7 @@ th {
 
 /* Especificidad: 001 */
 td {
-  background-color: #A8BBB0;
+  background-color: #ffffff;
   color: #000000;
 }
 
