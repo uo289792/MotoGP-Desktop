@@ -34,6 +34,8 @@ article img {
     position: absolute;
     border-radius: 0.5em;
     background: #05445e;
+    /* Color de primer plano establecido en layout-cards.css (#ffffff) para article h3 */
+    /* Color de primer planoheredado de body (#05445e) para article img */
     backface-visibility: hidden;
 }
 

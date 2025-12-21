@@ -216,13 +216,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $preguntas = [
         "¿Cuál es la temática de las fotos de la página principal?",
         "¿Cuántas noticias aparecen en la página principal?",
-        "¿Cuántos enlaces hay en el menú principal?",
-        "¿En qué sección se encuentra el mapa?",
+        "¿Cuántos enlaces hay en el menú principal de navegación?",
+        "¿En qué sección se encuentra el mapa de Google Maps?",
         "¿Qué piloto aparece en la sección Piloto?",
         "¿Cuál es su apodo?",
         "¿Qué país está asociado al circuito?",
         "¿Qué temperatura se muestra el día de la carrera?",
-        "¿Cuántos botones tiene la sección cronómetro?",
+        "¿Cuántos botones tiene el cronómetro de los juegos disponibles?",
         "¿Cuánto tiempo tardas en completar el juego de cartas?"
     ];
 

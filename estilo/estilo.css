@@ -35,10 +35,11 @@ header {
 /* Especificidad: 002 */
 header a {
   color:  #ffffff;  /* White */
+  /* Color de fondo heredado de header (#05445e) */
   text-decoration: none;
 }
 
-/* Especificidad: 003 */
+/* Especificidad: 002 */
 input + article * {
   margin-left: 0;
   margin-right: 0;
@@ -47,6 +48,7 @@ input + article * {
 /* Especificidad: 002*/
 header + p {
   background-color: #A8BBB0;
+  /* Color de primer plano heredado de body (#05445e) */
   padding: 1em 1em;
   margin-top: 0em;
   font-size: 0.9em; 
@@ -55,6 +57,7 @@ header + p {
 /* Especificidad: 003*/
 header + p > a {
   color: #05445e;
+  /* Color de fondo heredado de header + p (#A8BBB0) */
 }
 
 /* Especificidad: 003*/
@@ -65,7 +68,8 @@ header nav a {
 
 /* Especificidad: 013 */
 header nav a.active {
-    color: #FFF894;
+  color: #FFF894;
+  /* Color de fondo heredado de header (#05445e) */
 }
 
 /* Especificidad: 003 */
@@ -183,57 +187,64 @@ h3 > img {
   margin-left: 0.5em;
 }
 
+/* Especificidad: 001 */
+table{
+  border-collapse: collapse;
+  width: 30%;
+  font-size: 1.3em;
+}
+
 @media (max-width: 600px) {
   /* Especificidad: 001 */
   video {
-    width:100%;
-    height:auto;
+    width:100%; /* Redefinición de width */
+    height:auto; /* Redefinición de height */
   }
   /* Especificidad: 001 */
   audio {
-    width:100%;
+    width:100%; /* Redefinición de width */
   }
   /* Especificidad: 001 */
   table {
-    width: 100%;
+    width: 100%; /* Redefinición de width */
   }
 
   /* Especificidad: 002 */
   figure img{
-    width: 100%;  
-    height:auto;     
+    width: 100%; /* Redefinición de width */
+    height:auto; /* Redefinición de height */
   }
 
   /* Especificidad: 002 */
   figure video{
-    width: 100%;  
-    height:auto;     
+    width: 100%;  /* Redefinición de width */
+    height:auto;  /* Redefinición de height */    
   }
 
   /* Especificidad: 001 */
   textarea {
-    width: 100%;
+    width: 100%; /* Redefinición de width */
   }
 
   /* Especificidad: 001 */
   select {
-    width: 100%;
+    width: 100%; /* Redefinición de width */
   }
 
   /* Especificidad: 003 */
   section h3 + img {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Redefinición de width */
+    height: auto; /* Redefinición de height */
   }
 
   /* Especificidad: 002 */
   h3 > img {
-    width: 12%;
+    width: 12%; /* Redefinición de width */
   }
 
   /* Especificidad: 001 */
   input {
-    width: 100%;
+    width: 100%; /* Redefinición de width */
   }
 }
 
@@ -242,13 +253,6 @@ h3 > img {
 /* Especificidad: 002 */
 main p {
   text-align: justify;
-}
-
-/* Especificidad: 001 */
-table{
-  border-collapse: collapse;
-  width: 30%;
-  font-size: 1.3em;
 }
 
 /* Especificidad: 001 */

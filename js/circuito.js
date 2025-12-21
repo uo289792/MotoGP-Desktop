@@ -11,7 +11,8 @@ class Circuito {
     constructor() {
         const seccionHTML = document.querySelector('main > section:nth-of-type(1)');
         this.#inputHTML = seccionHTML.querySelector('input[accept*="html"]');
-        this.#destinoHTML = seccionHTML.querySelector('article');
+        this.#destinoHTML = document.createElement('article');
+        this.#inputHTML.insertAdjacentElement('afterend', this.#destinoHTML);
 
         const seccionSVG = document.querySelector('main > section:nth-of-type(2)');
         this.#inputSVG = seccionSVG.querySelector('input[accept*="svg"]');

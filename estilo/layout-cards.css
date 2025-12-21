@@ -45,15 +45,22 @@ main article {
 
 /* especificidad: 002 */
 article h3 {
-  color: #ffffff;           /* color del texto en blanco */
+  color: #ffffff; /* color del texto en blanco */
+  /* Color de fondo estaclecido en cards.css (#05445e) */
   text-align: center;
 }
 
 @media (max-width: 600px) {
   /* especificidad: 001 */
   main {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: repeat(2, 1fr);     /* Redefinición de grid-template-columns */
+    row-gap: 0.5rem; /* Redefinición de row-gap */
+    column-gap: 0.5rem;   /* Redefinición de column-gap */
     padding: 0rem;  
+    /*  Redefinición de padding-bottom 
+        Redefinición de padding-left
+        Redefinición de padding-top
+        Redefinición de padding-right
+    */
   }
 }
