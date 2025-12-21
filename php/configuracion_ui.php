@@ -74,15 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <form method="post">
         <button type="submit" name="accion" value="reiniciar">
-          Reiniciar datos (vaciar tablas)
+          Reiniciar datos 
         </button>
 
         <button type="submit" name="accion" value="eliminar">
-          Eliminar base de datos
+          Eliminar BD
         </button>
 
         <button type="submit" name="accion" value="exportar">
-          Exportar resultados (.csv)
+          Exportar resultados
         </button>
       </form>
     </main>
