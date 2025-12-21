@@ -42,15 +42,15 @@ class Carrusel {
     #mostrarFotografias() {
         if (this.#fotografias.length === 0) return;
 
-        const article = $("<article></article>");
+        const section = $("<section></section>");
         const h3 = $("<h3>Imágenes del circuito de Mugello</h3>");
         const img = $("<img>")
             .attr("src", this.#fotografias[this.#actual].url)
             .attr("alt", this.#fotografias[this.#actual].alt);
 
-        article.append(h3);
-        article.append(img);
-        $("main").append(article);
+        section.append(h3);
+        section.append(img);
+        $("main").append(section);
 
         setInterval(this.#cambiarFotografia.bind(this), 3000);
     }
@@ -59,7 +59,7 @@ class Carrusel {
         this.#actual++;
         if (this.#actual > this.#maximo) this.#actual = 0;
 
-        $("article img")
+        $("section img")
             .attr("src", this.#fotografias[this.#actual].url)
             .attr("alt", this.#fotografias[this.#actual].alt);
     }

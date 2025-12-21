@@ -169,10 +169,11 @@ figure video{
 }
 
 /* Especificidad: 003 */
-article h3 + img {
+section h3 + img {
   width: 60%;
   height: auto;
 }
+
 
 /* Especificidad: 002 */
 h3 > img {
@@ -220,7 +221,7 @@ h3 > img {
   }
 
   /* Especificidad: 003 */
-  article h3 + img {
+  section h3 + img {
     width: 100%;
     height: auto;
   }

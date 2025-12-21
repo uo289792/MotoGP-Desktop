@@ -8,7 +8,7 @@ class Noticias {
         // Búsqueda avanzada: MotoGP y términos relacionados
         this.#busqueda = 'MotoGP+(motociclismo|"gran premio"|moto)';
         this.#url = "https://api.thenewsapi.com/v1/news/all";
-        this.#apiKey = "JewnK4wW0Q63HNgkn4MRgfP56bYpXQ64iJoIxI6C";
+        this.#apiKey = "J6r4hmVwFPvtFWs22RlJDOMnEUffh85oZB4Hs1Oa";
         this.#noticias = [];
     }
 

@@ -2,7 +2,9 @@
 session_start();
 require_once __DIR__ . '/cronometro.php';
 
-class Configuracion {
+/* ================= CONFIGURACIÓN BD ================= */
+
+class ConfiguracionTest {
 
     private $conn;
 
@@ -26,15 +28,14 @@ class Configuracion {
         $stmt->bind_param("s", $nombre);
         $stmt->execute();
         $stmt->store_result();
-        if ($stmt->num_rows > 0) {
-            $stmt->close();
-            return;
-        }
-        $stmt->close();
 
-        $stmt = $this->conn->prepare("INSERT INTO profesiones (nombre) VALUES (?)");
-        $stmt->bind_param("s", $nombre);
-        $stmt->execute();
+        if ($stmt->num_rows === 0) {
+            $stmt->close();
+            $stmt = $this->conn->prepare("INSERT INTO profesiones (nombre) VALUES (?)");
+            $stmt->bind_param("s", $nombre);
+            $stmt->execute();
+        }
+
         $stmt->close();
     }
 
@@ -59,9 +60,8 @@ class Configuracion {
         $stmt->close();
     }
 
-    public function insertarResultados($codigo, $dispositivo, $tiempo, $valoracion, $respuestas, $comentarios_usuario, $propuestas_mejora) {
-        $json_respuestas = json_encode($respuestas);
-        $completada = 1;
+    public function insertarResultados($codigo, $dispositivo, $tiempo, $valoracion, $respuestas, $comentarios, $mejoras) {
+        $json = json_encode($respuestas);
 
         $stmt = $this->conn->prepare(
             "INSERT INTO resultados_prueba
@@ -70,42 +70,63 @@ class Configuracion {
              VALUES (?,?,?,?,?,?,?,?)"
         );
 
+        $completada = 1;
+
         $stmt->bind_param(
             "siidsssi",
             $codigo,
             $dispositivo,
             $tiempo,
             $completada,
-            $json_respuestas,
-            $comentarios_usuario,
-            $propuestas_mejora,
+            $json,
+            $comentarios,
+            $mejoras,
             $valoracion
         );
+
         $stmt->execute();
         $stmt->close();
     }
 
-    public function insertarObservacionesFacilitador($codigo, $observaciones) {
-        if (empty($observaciones)) return;
+    public function insertarObservacionesFacilitador($codigo, $obs) {
+        if ($obs === '') return;
+
         $stmt = $this->conn->prepare(
-            "INSERT INTO observaciones (codigo_usuario, comentarios) VALUES (?, ?)"
+            "INSERT INTO observaciones (codigo_usuario, comentarios) VALUES (?,?)"
         );
-        $stmt->bind_param("ss", $codigo, $observaciones);
+        $stmt->bind_param("ss", $codigo, $obs);
         $stmt->execute();
         $stmt->close();
     }
 }
 
-$cronometro = new Cronometro();
-$cfg = new Configuracion();
+/* ================= CRONÓMETRO ================= */
+
+$cronometro = new Cronometro(
+    $_SESSION['tiempo'] ?? 0,
+    $_SESSION['inicio'] ?? null
+);
+
+/* ================= ESTADO ================= */
 
 $estado = $_SESSION['estado'] ?? 'preguntas';
 $error  = '';
 $msg    = '';
 
+/* Arrancar cronómetro SOLO una vez */
+if ($estado === 'preguntas' && !isset($_SESSION['inicio'])) {
+    $cronometro->arrancar();
+    $_SESSION['inicio'] = $cronometro->getInicio();
+}
+
+/* ================= PROCESAR FORM ================= */
+
+$cfg = new ConfiguracionTest();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($estado === 'preguntas') {
+
         $_SESSION['respuestas'] = [];
 
         for ($i = 1; $i <= 10; $i++) {
@@ -117,7 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($error === '') {
-            $cronometro->parar(); // Detenemos el cronómetro tras las 10 preguntas
+            $cronometro->parar();
+            $_SESSION['tiempo'] = $cronometro->getTiempo();
+            $_SESSION['inicio'] = null;
             $_SESSION['estado'] = 'datos';
             $estado = 'datos';
         }
@@ -135,18 +158,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['pericia']
         );
 
-        // Guardar resultados de la prueba
         $cfg->insertarResultados(
             $_POST['codigo_usuario'],
             (int)$_POST['dispositivo_id'],
-            $cronometro->getTiempo(),
+            $_SESSION['tiempo'],
             (int)$_POST['valoracion'],
             $_SESSION['respuestas'],
             $_POST['comentarios_usuario'] ?? '',
             $_POST['propuestas_mejora'] ?? ''
         );
 
-        // Guardar observaciones del facilitador
         $cfg->insertarObservacionesFacilitador(
             $_POST['codigo_usuario'],
             $_POST['observaciones_facilitador'] ?? ''
@@ -161,6 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -221,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section>
         <h2>Datos del usuario y observaciones</h2>
 
-        <label for="codigo_usuario:">Código de usuario</label>
+        <label for="codigo_usuario">Código de usuario</label>
             <input type="text" id="codigo_usuario" name="codigo_usuario" required>
 
         <label for="profesion">Profesión:</label>
