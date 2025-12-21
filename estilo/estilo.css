@@ -99,7 +99,7 @@ video {
 
 /* Especificidad: 001 */
 audio {
- width:40%;
+  width:40%;
 }
 
 /* Especificidad: 001 */
@@ -163,6 +163,12 @@ figure video{
   height:auto;     
 }
 
+/* Especificidad: 003 */
+article h3 + img {
+  width: 50%;
+  height: auto;
+}
+
 @media (max-width: 600px) {
   /* Especificidad: 001 */
   video {
@@ -199,6 +205,12 @@ figure video{
   select {
     width: 100%;
   }
+
+  /* Especificidad: 003 */
+  article h3 + img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 /* Estilos optativos */
@@ -210,9 +222,9 @@ main p {
 
 /* Especificidad: 001 */
 table{
-    border-collapse: collapse;
-    width: 30%;
-    font-size: 1.3em;
+  border-collapse: collapse;
+  width: 30%;
+  font-size: 1.3em;
 }
 
 /* Especificidad: 001 */

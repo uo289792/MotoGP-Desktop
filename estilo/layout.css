@@ -38,12 +38,6 @@ body div {
         gap: 1em;
     }
 
-    /* Especificidad: 003 */
-    article h2 + img {
-        width: 100%;
-        height: auto;
-    }
-
     /* Especificidad: 002 */
     body div {
         width: 100%;   /* Redefinición de width */

@@ -16,7 +16,7 @@ class Carrusel {
 
         // JSONP con jQuery
         $.getJSON(flickrAPI, {
-            tags:  this.#busqueda,
+            tags: this.#busqueda,
             tagmode: "all",
             format: "json"
         })
@@ -33,8 +33,7 @@ class Carrusel {
             const url = foto.media.m.replace("_m.", "_b.");
             this.#fotografias.push({
                 url,
-                alt: "Imagen del circuito de Mugello (MotoGP)",
-                caption: foto.title || foto.tags || "Imagen del circuito"
+                alt: "Imagen del circuito de Mugello (MotoGP)"
             });
         }
         this.#mostrarFotografias();
@@ -45,31 +44,24 @@ class Carrusel {
 
         const article = $("<article></article>");
         const h3 = $("<h3>Imágenes del circuito de Mugello</h3>");
-
-        const figure = $("<figure></figure>");
         const img = $("<img>")
             .attr("src", this.#fotografias[this.#actual].url)
             .attr("alt", this.#fotografias[this.#actual].alt);
-        const figcaption = $("<figcaption></figcaption>")
-            .text(this.#fotografias[this.#actual].caption);
-
-        figure.append(img);
-        figure.append(figcaption);
 
         article.append(h3);
-        article.append(figure);
+        article.append(img);
         $("main").append(article);
 
-        setInterval(this.#cambiarFotografia.bind(this, figure, img, figcaption), 3000);
+        setInterval(this.#cambiarFotografia.bind(this), 3000);
     }
 
-    #cambiarFotografia(figure, img, figcaption) {
+    #cambiarFotografia() {
         this.#actual++;
         if (this.#actual > this.#maximo) this.#actual = 0;
 
-        img.attr("src", this.#fotografias[this.#actual].url)
-           .attr("alt", this.#fotografias[this.#actual].alt);
-        figcaption.text(this.#fotografias[this.#actual].caption);
+        $("article img")
+            .attr("src", this.#fotografias[this.#actual].url)
+            .attr("alt", this.#fotografias[this.#actual].alt);
     }
 }
 
