@@ -297,6 +297,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php else: ?>
 
     <section>
+        <h2>Finalizado</h2>
         <p>La página se cerrará automáticamente en unos segundos.</p>
     </section>
 
