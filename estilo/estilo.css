@@ -162,6 +162,7 @@ input[type="file"] {
 
 /* Especificidad: 001 */
 button {
+  margin-bottom: 0.5em;
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -245,6 +246,12 @@ table{
   /* Especificidad: 001 */
   input {
     width: 100%; /* Redefinición de width */
+  }
+
+  /* Especificidad: 001 */
+  button {
+    width: 100%;  /* Redefinición de width */
+    display: block;
   }
 }
 

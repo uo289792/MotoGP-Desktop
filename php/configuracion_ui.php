@@ -60,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p>Estás en: <a href="../index.html">Inicio</a> >> <a href="../juegos.html">Juegos</a> >> <strong>Configuración de la base de datos</strong></p>
 
     <main>
-
-      <h1>Configuración de la base de datos</h1>
+      <h2>Configuración de la base de datos</h2>
       <p>Operaciones disponibles sobre la base de datos de pruebas.</p>
 
       <?php if($msg): ?>
