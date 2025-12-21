@@ -38,7 +38,7 @@ header a {
   text-decoration: none;
 }
 
-/* Especificidad: 011 */
+/* Especificidad: 003 */
 input + article * {
   margin-left: 0;
   margin-right: 0;
@@ -92,8 +92,8 @@ caption {
 
 /* Especificidad: 001 */
 video {
- width:40%;
- height:auto;
+  width:40%;
+  height:auto;
 }
 
 /* Especificidad: 001 */
@@ -156,12 +156,11 @@ input[type="file"] {
   width: 100%;
 }
 
-/* Especificidad: 011 */
+/* Especificidad: 001 */
 button {
   font-weight: bold;
   font-size: 1.2em;
 }
-
 
 /* Especificidad: 002 */
 figure video{
@@ -175,7 +174,7 @@ article h3 + img {
   height: auto;
 }
 
-/* Especificidad: 003 */
+/* Especificidad: 002 */
 h3 > img {
   width: 5%;
   height: auto;
@@ -226,7 +225,7 @@ h3 > img {
     height: auto;
   }
 
-  /* Especificidad: 003 */
+  /* Especificidad: 002 */
   h3 > img {
     width: 12%;
   }

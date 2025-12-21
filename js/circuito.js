@@ -38,16 +38,38 @@ class Circuito {
         if (!file) return;
 
         const reader = new FileReader();
+
         reader.onload = () => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(reader.result, 'text/html');
+
             this.#destinoHTML.innerHTML = '';
-            if (doc.body) {
-                this.#destinoHTML.appendChild(doc.body.cloneNode(true));
-            }
+
+            const main = doc.querySelector('main');
+            if (!main) return;
+
+            /* Corregir rutas: eliminar ../ */
+            main.querySelectorAll('[src]').forEach(el => {
+                el.setAttribute(
+                    'src',
+                    el.getAttribute('src').replace(/^(\.\.\/)+/, '')
+                );
+            });
+
+            main.querySelectorAll('[href]').forEach(el => {
+                el.setAttribute(
+                    'href',
+                    el.getAttribute('href').replace(/^(\.\.\/)+/, '')
+                );
+            });
+
+            /* Insertar solo el contenido del main */
+            this.#destinoHTML.appendChild(main.cloneNode(true));
         };
+
         reader.readAsText(file);
     }
+
 
     /* ================= SVG ================= */
 

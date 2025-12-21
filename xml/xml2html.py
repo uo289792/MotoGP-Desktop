@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 import xml.etree.ElementTree as ET
 
 NS = {"u": "http://www.uniovi.es"}
@@ -15,6 +16,7 @@ LABELS = {
     "numVueltas": "Número de vueltas",
     "nombre": "Nombre"
 }
+
 
 class Html:
     def __init__(self, title="MotoGP-Información", css_href="../estilo/estilo.css", lang="es"):
@@ -34,18 +36,27 @@ class Html:
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{self.title}</title>
     <link rel="stylesheet" href="{self.css_href}" />
-    <link rel="icon" href="multimedia/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../multimedia/favicon.ico" type="image/x-icon" />
 </head>
 """
 
     def open_body(self):
-        return "<body>\n  <main>\n"
+        return (
+            "<body>\n"
+            "  <header>\n"
+            "    <h1>MotoGP – Información del circuito</h1>\n"
+            "  </header>\n"
+            "  <main>\n"
+        )
 
     def close_body(self):
         return "  </main>\n</body>\n</html>\n"
 
     def section(self, title, inner):
-        return f"    <section>\n      <h3>{title}</h3>\n{inner}    </section>\n"
+        return f"""    <section>
+      <h3>{title}</h3>
+{inner}    </section>
+"""
 
     def ul(self, items):
         out = ["      <ul>"]
@@ -60,11 +71,14 @@ class Html:
     def to_string(self):
         return self.head() + self.open_body() + "".join(self.parts) + self.close_body()
 
+
 def text_of(el):
     return (el.text or "").strip() if el is not None else ""
 
+
 def read_dom(path):
     return ET.parse(path).getroot()
+
 
 def format_with_unit(el):
     val = text_of(el)
@@ -76,11 +90,13 @@ def format_with_unit(el):
         return f"{val} {zona}"
     return val
 
+
 def build_info_sections(root):
     html = Html()
 
     # --- Datos generales ---
     general_items = []
+
     nombre = root.find("./u:nombre", NS)
     if nombre is not None:
         general_items.append(f"{LABELS['nombre']}: {text_of(nombre)}")
@@ -101,33 +117,34 @@ def build_info_sections(root):
 
     html.add(html.section("Datos generales del circuito", html.ul(general_items)))
 
-    # --- Multimedia como figuras ---
+    # --- Multimedia: Fotos ---
     fotos = root.findall(".//u:fotos/u:foto", NS)
     for f in fotos:
-        src = f.attrib.get("src")
+        src = "../" + f.attrib.get("src", "")
         desc = f.attrib.get("descripcion", "")
-        figure_html = f"""    <figure>
-        <img src="{src}" alt="{desc}" />
-        <figcaption>{desc}</figcaption>
-    </figure>\n"""
-        html.add(figure_html)
+        html.add(f"""    <figure>
+      <img src="{src}" alt="{desc}" />
+      <figcaption>{desc}</figcaption>
+    </figure>
+""")
 
+    # --- Multimedia: Vídeos ---
     videos = root.findall(".//u:videos/u:video", NS)
     for v in videos:
-        src = v.attrib.get("src")
+        src = "../" + v.attrib.get("src", "")
         desc = v.attrib.get("descripcion", "")
-        figure_html = f"""    <figure>
-        <video src="{src}" controls></video>
-        <figcaption>{desc}</figcaption>
-    </figure>\n"""
-        html.add(figure_html)
+        html.add(f"""    <figure>
+      <video src="{src}" controls></video>
+      <figcaption>{desc}</figcaption>
+    </figure>
+""")
 
     # --- Resultados ---
     vencedor = root.find(".//u:vencedor", NS)
     if vencedor is not None:
         v_items = []
         for c in vencedor:
-            lname = c.tag.split("}",1)[-1]
+            lname = c.tag.split("}", 1)[-1]
             label = LABELS.get(lname, lname.capitalize())
             val = text_of(c)
             if lname == "tiempo":
@@ -144,7 +161,8 @@ def build_info_sections(root):
             pais = p.attrib.get("pais")
             puntos = p.attrib.get("puntos")
             podium_items.append(
-                f"Posición {pos}:<ul>"
+                f"Posición {pos}:"
+                f"<ul>"
                 f"<li>Piloto: {piloto}</li>"
                 f"<li>País: {pais}</li>"
                 f"<li>Puntos: {puntos}</li>"
@@ -155,16 +173,21 @@ def build_info_sections(root):
     # --- Referencias ---
     referencias = root.findall(".//u:referencia", NS)
     if referencias:
-        ref_items = [f'<a href="{text_of(r)}">{r.attrib.get("sitio","")}</a>' for r in referencias]
+        ref_items = [
+            f'<a href="{text_of(r)}">{r.attrib.get("sitio", "")}</a>'
+            for r in referencias
+        ]
         html.add(html.section("Referencias", html.ul(ref_items)))
 
     return html
+
 
 def xml2html(xml_path: str, html_path: str):
     root = read_dom(xml_path)
     html = build_info_sections(root)
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html.to_string())
+
 
 if __name__ == "__main__":
     xml2html("circuitoEsquema.xml", "InfoCircuito.html")
