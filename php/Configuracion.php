@@ -74,48 +74,100 @@ class Configuracion {
     }
 
     // Exporta CSV si la BD y tabla existen
+    // Exporta CSV si la BD y tabla existen
     public function exportarCSV($outFilename = 'resultados_prueba.csv') {
-        if (!$this->conn) throw new Exception("La base de datos '{$this->db}' no existe.");
 
+        if (!$this->conn) {
+            throw new Exception("La base de datos '{$this->db}' no existe.");
+        }
+
+        // Comprobar si existe la tabla
         $res = $this->conn->query("SHOW TABLES LIKE 'resultados_prueba'");
-        if (!$res || $res->num_rows === 0) throw new Exception("No existe la tabla 'resultados_prueba'.");
+        if (!$res || $res->num_rows === 0) {
+            throw new Exception("No existe la tabla 'resultados_prueba'.");
+        }
 
-        // Consulta de resultados
+        // Consulta completa con todos los datos relevantes
         $sql = "
-          SELECT r.id, r.codigo_usuario, u.profesion_id, p.nombre AS profesion,
-                 r.dispositivo_id, d.nombre AS dispositivo,
-                 r.tiempo_segundos, r.completada, r.comentarios_usuario,
-                 r.propuestas_mejora, r.valoracion
-          FROM resultados_prueba r
-          LEFT JOIN usuarios u ON r.codigo_usuario = u.codigo_usuario
-          LEFT JOIN profesiones p ON u.profesion_id = p.id
-          LEFT JOIN dispositivos d ON r.dispositivo_id = d.id
-          ORDER BY r.id ASC
+            SELECT 
+                r.id,
+                r.codigo_usuario,
+                u.profesion_id,
+                p.nombre AS profesion,
+                u.edad,
+                u.genero,
+                u.pericia_informatica,
+                r.dispositivo_id,
+                d.nombre AS dispositivo,
+                r.tiempo_segundos,
+                r.completada,
+                r.respuestas,
+                r.comentarios_usuario,
+                r.propuestas_mejora,
+                r.valoracion,
+                o.comentarios AS observaciones_facilitador
+            FROM resultados_prueba r
+            LEFT JOIN usuarios u ON r.codigo_usuario = u.codigo_usuario
+            LEFT JOIN profesiones p ON u.profesion_id = p.id
+            LEFT JOIN dispositivos d ON r.dispositivo_id = d.id
+            LEFT JOIN observaciones o ON r.codigo_usuario = o.codigo_usuario
+            ORDER BY r.id ASC
         ";
-        $res = $this->conn->query($sql);
-        if (!$res) throw new Exception("Error consultando resultados: " . $this->conn->error);
 
+        $res = $this->conn->query($sql);
+        if (!$res) {
+            throw new Exception("Error consultando resultados: " . $this->conn->error);
+        }
+
+        // Cabeceras para descarga
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename="'.$outFilename.'"');
 
+        // Abrir salida CSV
         $out = fopen('php://output', 'w');
-        fputcsv($out, ['id','codigo_usuario','profesion_id','profesion','dispositivo_id','dispositivo','tiempo_segundos','completada','comentarios_usuario','propuestas_mejora','valoracion']);
 
+        // Cabecera del CSV
+        fputcsv($out, [
+            'id',
+            'codigo_usuario',
+            'profesion_id',
+            'profesion',
+            'edad',
+            'genero',
+            'pericia_informatica',
+            'dispositivo_id',
+            'dispositivo',
+            'tiempo_segundos',
+            'completada',
+            'respuestas',
+            'comentarios_usuario',
+            'propuestas_mejora',
+            'valoracion',
+            'observaciones_facilitador'
+        ]);
+
+        // Filas de datos
         while ($row = $res->fetch_assoc()) {
             fputcsv($out, [
                 $row['id'],
                 $row['codigo_usuario'],
                 $row['profesion_id'],
                 $row['profesion'],
+                $row['edad'],
+                $row['genero'],
+                $row['pericia_informatica'],
                 $row['dispositivo_id'],
                 $row['dispositivo'],
                 $row['tiempo_segundos'],
                 $row['completada'] ? '1' : '0',
+                $row['respuestas'],
                 $row['comentarios_usuario'],
                 $row['propuestas_mejora'],
-                $row['valoracion']
+                $row['valoracion'],
+                $row['observaciones_facilitador']
             ]);
         }
+
         fclose($out);
         exit;
     }
